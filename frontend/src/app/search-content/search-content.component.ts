@@ -9,7 +9,6 @@ import _ from 'underscore';
 })
 export class SearchContentComponent implements OnInit {
   @Input('searchType') searchType: string
-  // ratingChartScatterLabel = "Ratings"
   viewMode = '' // searching | summary | results | detail | noResult | ''
   summary = {}
   origin = {}
@@ -21,25 +20,17 @@ export class SearchContentComponent implements OnInit {
   constructor(private searchState: SearchStateService) { }
 
   ngOnInit() {
-    // console.log('searchType', this.searchType)
     this.searchState.currentState.subscribe(state => {
       this.currentState = state
-      // console.log('state', state)
       const { viewMode, summary, origin, arround } = state[this.searchType]
       this.viewMode = viewMode
       this.summary = summary
       this.origin = origin
       this.arround = arround
-
-      // console.log('summary', JSON.stringify(summary))
-      // console.log('origin', JSON.stringify(origin))
-      // console.log('arround', JSON.stringify(arround))
     })
   }
 
   onClickAction(action) {
-    // console.log('action', action)
-    // console.log('searchType', this.searchType)
     switch (action) {
       case 'compare': {
         return this.searchState.update(this.currentState, { columns: 2 })

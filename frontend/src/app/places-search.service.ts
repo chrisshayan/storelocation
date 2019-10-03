@@ -48,8 +48,6 @@ export class PlacesSearchService {
 
   search(query: string, radius: number): Observable<SearchResult> {
     const searchPlaceUrl = `${environment.apiUrl}/place/search`
-    // console.log('searchPlaceUrl: ', searchPlaceUrl)
-    // console.log('body: ', JSON.stringify({ query, radius }))
     return this.http.post<SearchResult>(searchPlaceUrl, JSON.stringify({ query, radius }), this.httpOptions)
   }
 }

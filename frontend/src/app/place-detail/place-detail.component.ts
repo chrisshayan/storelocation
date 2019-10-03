@@ -6,7 +6,7 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./place-detail.component.css']
 })
 export class PlaceDetailComponent implements OnInit {
-  @Input('data') data: {}
+  @Input('place') place: {}
 
   constructor() { }
 

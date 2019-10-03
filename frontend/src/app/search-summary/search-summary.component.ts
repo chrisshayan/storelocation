@@ -43,7 +43,6 @@ export class SearchSummaryComponent implements OnInit {
     // Types
     if (!_.isEmpty(this.data.types)) {
       Object.keys(this.data.types).map(label => {
-        console.log('buil label', label)
         this.typesChart.push(this.data.types[label])
         this.typesChartLabels.push(label)
         this.haveTypesChart = (!_.isEmpty(this.typesChart) && !_.isEmpty(this.typesChartLabels))
@@ -61,8 +60,6 @@ export class SearchSummaryComponent implements OnInit {
     if (!_.isEmpty(this.data.user_ratings)) {
       this.userRatingsChart = this.buildScatterChartData(this.data.user_ratings, 'haveUserRatingsChart')
     }
-
-    // console.log('data', JSON.stringify(this.data))
   }
 
   buildScatterChartData(data, haveChart) {

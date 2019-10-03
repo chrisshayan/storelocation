@@ -4,9 +4,9 @@
       <!-- summary -->
       <search-summary *ngSwitchCase="'summary'" [data]="summary" [origin]="origin"></search-summary>
       <!-- results -->
-      <search-results *ngSwitchCase="'results'" [data]="arround"></search-results>
+      <search-results *ngSwitchCase="'results'" [results]="arround" [origin]="origin"></search-results>
       <!-- detail -->
-      <place-detail *ngSwitchCase="'detail'" [data]="origin"></place-detail>
+      <place-detail *ngSwitchCase="'detail'" [place]="origin"></place-detail>
       <!-- no result -->
       <search-noresult *ngSwitchCase="'noResult'"></search-noresult>
       <!-- searching -->
@@ -14,8 +14,8 @@
     </mat-card-content>
     <mat-card-actions>
       <button mat-raised-button *ngIf="searchType === 'base'" (click)="onClickAction('compare')">COMPARE</button>
-      <!-- <button mat-raised-button (click)="onClickAction('view summary')">VIEW SUMMARY</button> -->
-      <!-- <button mat-raised-button (click)="onClickAction('view results')">VIEW RESULTS</button> -->
+      <button mat-raised-button (click)="onClickAction('view summary')">VIEW SUMMARY</button>
+      <button mat-raised-button (click)="onClickAction('view results')">VIEW RESULTS</button>
       <button mat-raised-button *ngIf="searchType === 'compare'" (click)="onClickAction('no compare')">NO
         COMPARE</button>
     </mat-card-actions>
