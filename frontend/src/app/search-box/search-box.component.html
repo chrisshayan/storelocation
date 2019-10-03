@@ -1,0 +1,27 @@
+<mat-card class="search-box">
+  <mat-card-content>
+    <form [formGroup]="searchForm" (ngSubmit)="onSearch()">
+      <div class="search-section">
+        <mat-form-field class="search-box">
+          <input formControlName="query" required type="search" matInput maxlength="256"
+            placeholder="Search by coordinate or name of Place" [matAutocomplete]="auto" (keyup)="autocomplete($event)">
+          <mat-hint>Ex. Coordinate: 10.797463,106.687569. </mat-hint>
+          <!-- <mat-error *ngIf="baseSearch.invalid && baseSearch.errors.required">Please search something.</mat-error> -->
+          <mat-autocomplete #auto="matAutocomplete">
+            <mat-option *ngFor="let option of options" [value]="option">{{ option }}</mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+      </div>
+      <div class="radius-section">
+        <mat-hint>Choose radius </mat-hint>
+        <mat-slider formControlName="radius" [max]="maxRadius" [min]="minRadius" thumbLabel>
+        </mat-slider>
+        <span matSuffix>Meters.</span>
+        <button type="button" mat-icon-button color="accent" [matTooltip]="radiusToolTip" matTooltipPosition="right">
+          <mat-icon>info</mat-icon>
+        </button>
+        <button mat-raised-button color="primary">Search <mat-icon>search</mat-icon></button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>

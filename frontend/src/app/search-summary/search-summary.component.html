@@ -1,0 +1,116 @@
+<mat-accordion *ngIf="showData" hideToggle>
+  <!-- Origin -->
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Place Name
+      </mat-panel-title>
+      <mat-panel-description>
+        {{origin?.name}}
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+  </mat-expansion-panel>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Place Rating
+      </mat-panel-title>
+      <mat-panel-description>
+        {{origin?.rating}}
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+  </mat-expansion-panel>
+  <!-- total -->
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Total
+      </mat-panel-title>
+      <mat-panel-description>
+        {{data?.total}} Places
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+  </mat-expansion-panel>
+  <!-- Chart Types -->
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Types Chart
+      </mat-panel-title>
+      <mat-panel-description>
+        The Line Chart for Types of the Nearby Places
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <charts-line *ngIf="haveTypesChart" [data]="typesChart" [chartLabels]="typesChartLabels" [label]="typeChartLabel">
+    </charts-line>
+  </mat-expansion-panel>
+  <!-- types -->
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Types
+      </mat-panel-title>
+      <mat-panel-description>
+        Type of the Nearby Places
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <mat-chip-list *ngIf="data.types">
+      <mat-chip class="types-mat-chip" *ngFor="let name of objectKeys(data.types)">
+        <span matBadge={{data.types[name]}} matBadgeOverlap="false">{{name}}</span>
+      </mat-chip>
+    </mat-chip-list>
+  </mat-expansion-panel>
+  <!-- ratings -->
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Ratings
+      </mat-panel-title>
+      <mat-panel-description>
+        Rating of the Nearby Places
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <mat-chip-list *ngIf="data.ratings">
+      <mat-chip color="accent" class="types-mat-chip" *ngFor="let rate of objectKeys(data.ratings)">
+        <span matBadge={{data.ratings[rate]}} matBadgeOverlap="false">{{rate}}</span>
+      </mat-chip>
+    </mat-chip-list>
+  </mat-expansion-panel>
+  <!-- Chart Ratings -->
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Ratings Chart
+      </mat-panel-title>
+      <mat-panel-description>
+        The Scatter Chart for Rating of the Nearby Places
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <charts-scatter *ngIf="haveRatingsChart" [data]="ratingsChart" [label]="ratingChartLabel"></charts-scatter>
+  </mat-expansion-panel>
+  <!-- Chart Users Rating -->
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Users Rating Chart
+      </mat-panel-title>
+      <mat-panel-description>
+        The Scatter Chart for User Ratings Total of the Nearby Places
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <charts-scatter *ngIf="haveUserRatingsChart" [data]="userRatingsChart" [label]="userRatingChartLabel">
+    </charts-scatter>
+  </mat-expansion-panel>
+  <!-- Chart Reviews -->
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Reviews Chart
+      </mat-panel-title>
+      <mat-panel-description>
+        The Scatter Chart for Reviews of the Nearby Places
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <charts-scatter *ngIf="haveReviewsChart" [data]="reviewsChart" [label]="reviewChartLabel"></charts-scatter>
+  </mat-expansion-panel>
+</mat-accordion>

@@ -1,0 +1,16 @@
+[debug] [2019-10-02T09:38:25.429Z] ----------------------------------------------------------------------
+[debug] [2019-10-02T09:38:25.433Z] Command:       C:\Program Files\nodejs\node.exe C:\Program Files\nodejs\node_modules\firebase-tools\lib\bin\firebase.js login
+[debug] [2019-10-02T09:38:25.434Z] CLI Version:   7.4.0
+[debug] [2019-10-02T09:38:25.434Z] Platform:      win32
+[debug] [2019-10-02T09:38:25.434Z] Node Version:  v10.16.3
+[debug] [2019-10-02T09:38:25.435Z] Time:          Wed Oct 02 2019 16:38:25 GMT+0700 (Indochina Time)
+[debug] [2019-10-02T09:38:25.435Z] ----------------------------------------------------------------------
+[debug] 
+[info] i  Firebase optionally collects CLI usage and error reporting information to help improve our products. Data is collected in accordance with Google's privacy policy (https://policies.google.com/privacy) and is not used to identify you.
+
+[info] i  To change your data collection preference at any time, run `firebase logout` and log in again.
+[info] 
+[info] Visit this URL on this device to log in:
+[info] https://accounts.google.com/o/oauth2/auth?client_id=563584335869-fgrhgmd47bqnekij5i8b5pr03ho849e6.apps.googleusercontent.com&scope=email%20openid%20https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcloudplatformprojects.readonly%20https%3A%2F%2Fwww.googleapis.com%2Fauth%2Ffirebase%20https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcloud-platform&response_type=code&state=215166969&redirect_uri=http%3A%2F%2Flocalhost%3A9005
+[info] 
+[info] Waiting for authentication...
