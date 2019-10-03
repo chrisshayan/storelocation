@@ -2,5 +2,5 @@
   "editor.tabSize": 2,
   // prevent file open in same tab
   "workbench.editor.enablePreview": false,
-  "emmet.triggerExpansionOnTab": true
+  "emmet.triggerExpansionOnTab": true,
 }
