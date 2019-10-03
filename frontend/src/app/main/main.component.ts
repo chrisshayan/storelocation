@@ -8,6 +8,16 @@ import { SearchStateService } from '../search-state.service';
 })
 export class MainComponent implements OnInit {
   cols: number = 1
+  searchBox = {
+    base: {
+      query: '',
+      radius: 50
+    },
+    compare: {
+      query: '',
+      radius: 50
+    }
+  }
 
   constructor(private searchState: SearchStateService) { }
 

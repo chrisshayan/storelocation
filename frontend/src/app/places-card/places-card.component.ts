@@ -7,7 +7,7 @@ import { FormGroup, FormControl } from '@angular/forms';
   styleUrls: ['./places-card.component.css']
 })
 export class PlacesCardComponent implements OnInit {
-  @Input('cardType') cardType: string
+  @Input('searchType') searchType: string
   @Input('searchBox') searchBox
 
   searchForm: FormGroup
@@ -18,8 +18,8 @@ export class PlacesCardComponent implements OnInit {
   ngOnInit() {
     // Search Form
     this.searchForm = new FormGroup({
-      query: new FormControl(this.searchBox[this.cardType].query),
-      radius: new FormControl(this.searchBox[this.cardType].radius)
+      query: new FormControl(this.searchBox[this.searchType].query),
+      radius: new FormControl(this.searchBox[this.searchType].radius)
     })
   }
 }

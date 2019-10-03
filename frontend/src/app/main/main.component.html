@@ -1,10 +1,10 @@
 <mat-grid-list [cols]="cols">
   <mat-grid-tile class="places-search">
-    <places-card [cardType]="'base'" [searchBox]="searchBox">
+    <places-card [searchType]="'base'" [searchBox]="searchBox">
     </places-card>
   </mat-grid-tile>
   <mat-grid-tile class="places-search" *ngIf="cols == 2">
-    <places-card [cardType]="'compare'" [searchBox]="searchBox">
+    <places-card [searchType]="'compare'" [searchBox]="searchBox">
     </places-card>
   </mat-grid-tile>
 </mat-grid-list>
