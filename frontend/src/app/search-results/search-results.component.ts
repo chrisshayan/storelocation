@@ -19,7 +19,6 @@ export class SearchResultsComponent implements OnInit, AfterViewInit {
   displayedColumns = ['name', 'types', 'rating', 'noOfRatings', 'noOfReviews']
 
   showMapToolTip: string = 'Show Place in Google Maps'
-  gmapLink: string = ''
 
   showResults: boolean = false
   pageSize = 5
@@ -38,10 +37,6 @@ export class SearchResultsComponent implements OnInit, AfterViewInit {
     this.pageLength = this.data.length
     this.showResults = true
     this.footerData = this.buildFooterData(this.origin)
-
-    if (!_.isEmpty(this.origin)) {
-      this.gmapLink = `${environment.gmapsPlaceRedirect}${this.origin.id}`
-    }
   }
 
   ngAfterViewInit() {
@@ -58,7 +53,8 @@ export class SearchResultsComponent implements OnInit, AfterViewInit {
 
       return {
         position, id, name, coordinate, types: this.getTypesText(types),
-        rating, noOfRatings, noOfReviews
+        rating, noOfRatings, noOfReviews,
+        gmapLink: `${environment.gmapsPlaceRedirect}${id}`
       }
     })
   }
@@ -71,7 +67,8 @@ export class SearchResultsComponent implements OnInit, AfterViewInit {
     const noOfReviews = (!_.isEmpty(reviews)) ? reviews.length : 0
     return {
       id, name, coordinate, types: this.getTypesText(types),
-      rating, noOfRatings, noOfReviews
+      rating, noOfRatings, noOfReviews,
+      gmapLink: `${environment.gmapsPlaceRedirect}${id}`
     }
   }
 
@@ -98,5 +95,6 @@ export interface PlaceDetail {
   rating: number
   noOfRatings: number
   noOfReviews: number
+  gmapLink: string
   // priceLevel: string
 }
