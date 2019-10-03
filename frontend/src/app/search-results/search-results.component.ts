@@ -2,6 +2,7 @@ import { Component, Input, OnInit, ViewChild, AfterViewInit } from '@angular/cor
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import _ from 'underscore';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'search-results',
@@ -10,10 +11,15 @@ import _ from 'underscore';
 })
 export class SearchResultsComponent implements OnInit, AfterViewInit {
   @Input('results') results = []
-  @Input('origin') origin = {}
+  @Input('origin') origin: {
+    id?: string
+  } = {}
 
   MAX_DATA_SHOW = 3
   displayedColumns = ['name', 'types', 'rating', 'noOfRatings', 'noOfReviews']
+
+  showMapToolTip: string = 'Show Place in Google Maps'
+  gmapLink: string = ''
 
   showResults: boolean = false
   pageSize = 5
@@ -32,6 +38,10 @@ export class SearchResultsComponent implements OnInit, AfterViewInit {
     this.pageLength = this.data.length
     this.showResults = true
     this.footerData = this.buildFooterData(this.origin)
+
+    if (!_.isEmpty(this.origin)) {
+      this.gmapLink = `${environment.gmapsPlaceRedirect}${this.origin.id}`
+    }
   }
 
   ngAfterViewInit() {

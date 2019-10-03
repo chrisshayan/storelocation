@@ -1,7 +1,7 @@
 import googlemaps
 from datetime import datetime
 import time
-from config import get_gmaps_config
+from flaskr.config import get_gmaps_config
 import sys
 import json
 
