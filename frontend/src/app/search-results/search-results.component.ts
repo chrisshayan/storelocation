@@ -18,8 +18,10 @@ export class SearchResultsComponent implements OnInit, AfterViewInit {
   showResults: boolean = false
   pageSize = 5
   pageLength = 0
-  data: PlaceDetail[] = []
+  pageSizeOptions = [5, 10, 15]
+
   footerData: PlaceDetail
+  data: PlaceDetail[] = []
   dataSource: MatTableDataSource<PlaceDetail>
 
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator
