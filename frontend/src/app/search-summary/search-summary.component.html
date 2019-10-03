@@ -1,4 +1,4 @@
-<mat-accordion *ngIf="showData" hideToggle>
+<mat-accordion *ngIf="showData" hideToggle class="summary-headers-align">
   <!-- Origin -->
   <mat-expansion-panel>
     <mat-expansion-panel-header>
@@ -7,6 +7,10 @@
       </mat-panel-title>
       <mat-panel-description>
         {{origin?.name}}
+        <a mat-button color="primary" href={{gmapLink}} target="_blank" [matTooltip]="showMapToolTip"
+          matTooltipPosition="left">
+          <mat-icon>map</mat-icon>
+        </a>
       </mat-panel-description>
     </mat-expansion-panel-header>
   </mat-expansion-panel>

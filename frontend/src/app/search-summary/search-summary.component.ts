@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import _ from 'underscore';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'search-summary',
@@ -7,7 +8,9 @@ import _ from 'underscore';
   styleUrls: ['./search-summary.component.css']
 })
 export class SearchSummaryComponent implements OnInit {
-  @Input('origin') origin: {}
+  @Input('origin') origin: {
+    id?: string
+  }
   @Input('data') data: {
     ratings?: {},
     reviews?: {},
@@ -16,6 +19,9 @@ export class SearchSummaryComponent implements OnInit {
   }
   objectKeys = Object.keys
   showData = false
+
+  showMapToolTip: string = 'Show Place in Google Maps'
+  gmapLink: string = ''
 
   // types chart
   typeChartLabel = "Types"
@@ -38,6 +44,9 @@ export class SearchSummaryComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    if (!_.isEmpty(this.origin)) {
+      this.gmapLink = `${environment.gmapsPlaceRedirect}${this.origin.id}`
+    }
     this.showData = !_.isEmpty(this.data)
 
     // Types

@@ -3,4 +3,5 @@
   // prevent file open in same tab
   "workbench.editor.enablePreview": false,
   "emmet.triggerExpansionOnTab": true,
+  "python.pythonPath": "C:\\Users\\tankhuu\\.virtualenvs\\backend-exJCHiw6\\Scripts\\python.exe",
 }
