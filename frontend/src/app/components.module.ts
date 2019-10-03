@@ -15,8 +15,8 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { ChartsModule } from 'ng2-charts';
 import { NgModule } from '@angular/core';
-
-
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @NgModule({
   exports: [
@@ -35,7 +35,9 @@ import { NgModule } from '@angular/core';
     MatProgressSpinnerModule,
     MatBadgeModule,
     MatChipsModule,
-    ChartsModule
+    ChartsModule,
+    MatTableModule,
+    MatPaginatorModule
   ]
 })
 export class ComponentsModule { }

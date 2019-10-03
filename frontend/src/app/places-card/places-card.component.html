@@ -2,5 +2,5 @@
 
   <search-box [searchType]="searchType" [searchForm]="searchForm"></search-box>
 
-  <search-content [searchType]="searchType"></search-content>
+  <search-content *ngIf="showSearchContent" [searchType]="searchType"></search-content>
 </section>

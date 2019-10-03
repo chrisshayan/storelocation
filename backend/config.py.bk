@@ -1,0 +1,2 @@
+def get_gmaps_config():
+    return {'api_key': 'AIzaSyA2h2EUq68d3caT2YVO1yBzWMAwqIidNLo'}

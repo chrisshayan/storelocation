@@ -41,7 +41,6 @@ export class ChartsScatterComponent implements OnInit {
     this.scatterChartData = [
       { data: this.data, label: this.label, pointRadius: this.pointRadius }
     ]
-    console.log('scatterChartData: ', this.scatterChartData)
   }
 
 }
