@@ -4,13 +4,13 @@
     <ng-container matColumnDef="name">
       <th mat-header-cell *matHeaderCellDef> Name </th>
       <td mat-cell *matCellDef="let res">
-        <a mat-button color="primary" href={{gmapLink}} target="_blank" [matTooltip]="showMapToolTip"
+        <a mat-button color="primary" href={{res.gmapLink}} target="_blank" [matTooltip]="showMapToolTip"
           matTooltipPosition="right">{{res.name }}
           <mat-icon>map</mat-icon>
         </a>
       </td>
       <td mat-footer-cell *matFooterCellDef>
-        <a mat-button color="accent" href={{gmapLink}} target="_blank" [matTooltip]="showMapToolTip"
+        <a mat-button color="accent" href={{footerData.gmapLink}} target="_blank" [matTooltip]="showMapToolTip"
           matTooltipPosition="right">{{footerData.name}}
           <mat-icon>map</mat-icon>
         </a>
