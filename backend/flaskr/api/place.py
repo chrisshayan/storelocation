@@ -36,7 +36,7 @@ class Place:
         except:
             print('error: ', sys.exc_info()[0])
 
-    def search(self, query: str, radius: int = 0):
+    def search(self, query: str, radius: int = 0, filters = None):
         try:
             self.CREDIT = 0
             start = datetime.now()
@@ -47,6 +47,8 @@ class Place:
 
             coordinate = ''
             place_id = ''
+            place_type = None
+            opennow = None
 
             places = []
             nearby = []
@@ -85,8 +87,12 @@ class Place:
                 coordinate = origin_place.get('coordinate')
             # print('origin coordinate: ', coordinate)
 
+            if(filters):
+                place_type = filters.get('type')
+                opennow = filters.get('opennow')
+
             # Extract all around you information
-            nearby = self.e_all_arround(coordinate, radius)
+            nearby = self.e_all_arround(coordinate, radius, place_type, opennow)
             # print('all arround', nearby)
             self.CREDIT += 1
             nearby = [n for n in nearby if n['types']
@@ -122,13 +128,22 @@ class Place:
         except Exception as e:
             print('search.error: ', e)
 
-    def search_place_nearby(self, type: str = 'full', location: str = '', radius: int = 0, rank_by: str = ''):
+    def search_place_nearby(self, type: str = 'full', location: str = '', radius: int = 0, 
+        rank_by: str = None, place_type: str=None, opennow: bool=None):
         try:
             places = []
             token = ''
+            params = {
+                location: location, radius: radius
+            }
+            if(rank_by):
+                params['rank_by'] = rank_by
+            if(place_type):
+                params['type'] = place_type
+            if(opennow):
+                params['opennow'] = opennow
 
-            nearby = self.gmaps.places_nearby(
-                location=location, radius=radius, rank_by=rank_by)
+            nearby = self.gmaps.places_nearby(**params)
             if(nearby['status'] == 'OK'):
                 places = [self.t_place_nearby(place)
                           for place in nearby['results']]
@@ -168,7 +183,7 @@ class Place:
         except Exception as e:
             print('e_place_detail.error: ', e)
 
-    def e_all_arround(self, coordinate: str, radius: int):
+    def e_all_arround(self, coordinate: str, radius: int, place_type: str = None, opennow: bool = None):
         """ Extract all nearby places
 
         Arguments:
@@ -178,8 +193,16 @@ class Place:
         Returns:
             list -- list of nearby places
         """
-        places = self.search_place_nearby(
-            type='full', location=coordinate, radius=radius)
+        params = {
+            type: 'full',
+            location: coordinate,
+            radius: radius
+        }
+        if(place_type):
+            params['place_type'] = place_type
+        if(opennow):
+            params['opennow'] = opennow
+        places = self.search_place_nearby(**params)
         print('places: ', len(places))
 
         return places

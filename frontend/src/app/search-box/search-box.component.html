@@ -14,14 +14,29 @@
       </div>
       <div class="radius-section">
         <mat-hint>Choose radius </mat-hint>
-        <mat-slider formControlName="radius" [max]="maxRadius" [min]="minRadius" thumbLabel>
-        </mat-slider>
-        <span matSuffix>Meters.</span>
         <button type="button" mat-icon-button color="accent" [matTooltip]="radiusToolTip" matTooltipPosition="right">
           <mat-icon>info</mat-icon>
         </button>
-        <button mat-raised-button color="primary">Search <mat-icon>search</mat-icon></button>
+        <mat-slider formControlName="radius" [max]="maxRadius" [min]="minRadius" thumbLabel>
+        </mat-slider>
+        <span matSuffix>Meters.</span>
       </div>
+      <div class="filter-section">
+        <mat-hint>Choose Type</mat-hint>
+        <button type="button" mat-icon-button color="accent" [matTooltip]="filterTypeToolTip"
+          matTooltipPosition="right">
+          <mat-icon>info</mat-icon>
+        </button>
+        <mat-form-field class="filter-box">
+          <input type="text" placeholder="Type of nearby places" formControlName="typeFilter" matInput
+            [matAutocomplete]="typeFilterAuto">
+          <mat-autocomplete #typeFilterAuto="matAutocomplete">
+            <mat-option *ngFor="let option of autoTypeFilter" [value]="option">{{option}}</mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+        <mat-slide-toggle formControlName="opennowFilter" labelPosition="before">Open now</mat-slide-toggle>
+      </div>
+      <button mat-raised-button color="primary">Search <mat-icon>search</mat-icon></button>
     </form>
   </mat-card-content>
 </mat-card>

@@ -8,21 +8,25 @@ import { SearchStateService } from '../search-state.service';
 })
 export class MainComponent implements OnInit {
   cols: number = 1
+  defaultValues = this.defaultSearchBoxValues()
   searchBox = {
-    base: {
-      query: '',
-      radius: 50
-    },
-    compare: {
-      query: '',
-      radius: 50
-    }
+    base: this.defaultValues,
+    compare: this.defaultValues
   }
 
   constructor(private searchState: SearchStateService) { }
 
   ngOnInit() {
     this.searchState.currentState.subscribe(state => this.cols = state.columns)
+  }
+
+  private defaultSearchBoxValues() {
+    return {
+      query: '',
+      radius: 50,
+      typeFilter: null,
+      opennowFilter: null
+    }
   }
 
 }
