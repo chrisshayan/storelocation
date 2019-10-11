@@ -95,11 +95,11 @@ class Place:
             if(len(nearby) > 0):
                 nearby_ids = [n['id'] for n in nearby]
 
-            arround = [self.e_place_detail(place_id)
-                       for place_id in nearby_ids]
+            # arround = [self.e_place_detail(place_id)
+            #            for place_id in nearby_ids]
             # for testing
-            # with open('arround.test.json', encoding='utf8') as file:
-            #     arround = json.loads(file.read())
+            with open('arround.test.json', encoding='utf8') as file:
+                arround = json.loads(file.read())
 
             if(len(arround) > 0):
                 summary = self.t_around_summary(arround)

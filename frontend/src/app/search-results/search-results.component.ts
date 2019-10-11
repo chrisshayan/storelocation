@@ -3,6 +3,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import _ from 'underscore';
 import { environment } from 'src/environments/environment';
+import { FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'search-results',
@@ -29,14 +30,36 @@ export class SearchResultsComponent implements OnInit, AfterViewInit {
   data: PlaceDetail[] = []
   dataSource: MatTableDataSource<PlaceDetail>
 
+  ratingOptions: number[] = []
+  numRatingsOptions: number[] = []
+  numReviewsOptions: number[] = []
+
+  filterForm = this.fb.group({
+    rating: [''],
+    numRatings: [''],
+    numReviews: [''],
+    shutdown: ['']
+  })
+
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator
+
+  constructor(private fb: FormBuilder) { }
 
   ngOnInit() {
     this.data = this.buildData(this.results)
+    if (!_.isEmpty(this.data)) {
+      this.ratingOptions = this.buildFilterAutoOptions(this.data, 'rating')
+      this.numRatingsOptions = this.buildFilterAutoOptions(this.data, 'noOfRatings')
+      this.numReviewsOptions = this.buildFilterAutoOptions(this.data, 'noOfReviews')
+    }
+    // on change filters
+
+    // generate dataSource
     this.dataSource = new MatTableDataSource(this.data)
     this.pageLength = this.data.length
     this.showResults = true
     this.footerData = this.buildFooterData(this.origin)
+
   }
 
   ngAfterViewInit() {
@@ -70,6 +93,10 @@ export class SearchResultsComponent implements OnInit, AfterViewInit {
       rating, noOfRatings, noOfReviews,
       gmapLink: `${environment.gmapsPlaceRedirect}${id}`
     }
+  }
+
+  buildFilterAutoOptions(options, field) {
+    return _.sortBy(_.uniq(options.map(d => d[field])), op => op)
   }
 
   getTypesText(types) {

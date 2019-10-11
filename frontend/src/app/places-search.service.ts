@@ -47,7 +47,7 @@ export class PlacesSearchService {
   constructor(private http: HttpClient) { }
 
   search(query: string, radius: number, filters: { type: string, opennow: boolean }): Observable<SearchResult> {
-    console.log('filters: ', filters)
+    // console.log('filters: ', filters)
     const searchPlaceUrl = `${environment.apiUrl}/place/search`
     return this.http.post<SearchResult>(searchPlaceUrl, JSON.stringify({ query, radius, ...filters }), this.httpOptions)
   }

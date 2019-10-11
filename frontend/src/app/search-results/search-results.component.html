@@ -1,81 +1,88 @@
-<div class="results-container mat-elevation-z8">
-  <!-- <form>
+<mat-card class="results-container mat-elevation-z8">
+  <form [formGroup]="filterForm">
     <mat-hint>Filter by: </mat-hint>
-    <mat-form-field>
-      <input type="text" placeholder="Rating" formControlName="ratingFilter" matInput
-        [matAutocomplete]="ratingFilterAuto">
-      <mat-autocomplete #typeFilterAuto="matAutocomplete">
-        <mat-option *ngFor="let option of autoRatingFilterOptions | async" [value]="option">{{option}}</mat-option>
-      </mat-autocomplete>
-      <input type="text" placeholder="# of Rating" formControlName="numRatingFilter" matInput
-        [matAutocomplete]="numRatingFilterAuto">
-      <mat-autocomplete #numRatingFilterAuto="matAutocomplete">
-        <mat-option *ngFor="let option of autoNumRatingFilterOptions | async" [value]="option">{{option}}</mat-option>
-      </mat-autocomplete>
-      <input type="text" placeholder="# of Reviews" formControlName="numReviewsFilter" matInput
-        [matAutocomplete]="numReviewsFilterAuto">
-      <mat-autocomplete #numReviewsFilterAuto="matAutocomplete">
-        <mat-option *ngFor="let option of autoNumReviewsFilterOptions | async" [value]="option">{{option}}</mat-option>
+    <mat-form-field class="filter-box">
+      <input type="text" placeholder="Rating" formControlName="rating" matInput [matAutocomplete]="ratingAuto">
+      <mat-autocomplete #ratingAuto="matAutocomplete">
+        <mat-option *ngFor="let option of ratingOptions" [value]="option">{{option}}</mat-option>
       </mat-autocomplete>
     </mat-form-field>
-  </form> -->
-  <table mat-table [dataSource]="dataSource" *ngIf="showResults">
-    <!-- Name Column -->
-    <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef> Name </th>
-      <td mat-cell *matCellDef="let res">
-        <a mat-button color="primary" href={{res.gmapLink}} target="_blank" [matTooltip]="showMapToolTip"
-          matTooltipPosition="right">{{res.name }}
-          <mat-icon>map</mat-icon>
-        </a>
-      </td>
-      <td mat-footer-cell *matFooterCellDef>
-        <a mat-button color="accent" href={{footerData.gmapLink}} target="_blank" [matTooltip]="showMapToolTip"
-          matTooltipPosition="right">{{footerData.name}}
-          <mat-icon>map</mat-icon>
-        </a>
-      </td>
-    </ng-container>
-    <!-- ['name', 'coordinate', 'types', 'rating', '# of ratings', '# of reviews', 'price level', 'actions'] -->
-    <!-- Coordinate Column -->
-    <!-- <ng-container matColumnDef="coordinate">
+    <mat-form-field class="filter-box">
+      <input type="text" placeholder="# of Rating" formControlName="numRatings" matInput
+        [matAutocomplete]="numRatingsAuto">
+      <mat-autocomplete #numRatingsAuto="matAutocomplete">
+        <mat-option *ngFor="let option of numRatingsOptions" [value]="option">{{option}}</mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+    <mat-form-field class="filter-box">
+      <input type="text" placeholder="# of Reviews" formControlName="numReviews" matInput
+        [matAutocomplete]="numReviewsAuto">
+      <mat-autocomplete #numReviewsAuto="matAutocomplete">
+        <mat-option *ngFor="let option of numReviewsOptions" [value]="option">{{option}}</mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+    <mat-slide-toggle formControlName="shutdown" labelPosition="before">Permanently Shutdown</mat-slide-toggle>
+  </form>
+
+  <mat-card-content>
+    <table mat-table [dataSource]="dataSource" *ngIf="showResults">
+      <!-- Name Column -->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> Name </th>
+        <td mat-cell *matCellDef="let res">
+          <a mat-button color="primary" href={{res.gmapLink}} target="_blank" [matTooltip]="showMapToolTip"
+            matTooltipPosition="right">{{res.name }}
+            <mat-icon>map</mat-icon>
+          </a>
+        </td>
+        <td mat-footer-cell *matFooterCellDef>
+          <a mat-button color="accent" href={{footerData.gmapLink}} target="_blank" [matTooltip]="showMapToolTip"
+            matTooltipPosition="right">{{footerData.name}}
+            <mat-icon>map</mat-icon>
+          </a>
+        </td>
+      </ng-container>
+      <!-- ['name', 'coordinate', 'types', 'rating', '# of ratings', '# of reviews', 'price level', 'actions'] -->
+      <!-- Coordinate Column -->
+      <!-- <ng-container matColumnDef="coordinate">
       <th mat-header-cell *matHeaderCellDef> Coordinate </th>
       <td mat-cell *matCellDef="let res"> {{res.coordinate }} </td>
       <td mat-footer-cell *matFooterCellDef> {{footerData.coordinate}} </td>
     </ng-container> -->
 
-    <!-- Types Column -->
-    <ng-container matColumnDef="types">
-      <th mat-header-cell *matHeaderCellDef> Types </th>
-      <td mat-cell *matCellDef="let res"> {{res.types }} </td>
-      <td mat-footer-cell *matFooterCellDef> {{footerData.types}} </td>
-    </ng-container>
+      <!-- Types Column -->
+      <ng-container matColumnDef="types">
+        <th mat-header-cell *matHeaderCellDef> Types </th>
+        <td mat-cell *matCellDef="let res"> {{res.types }} </td>
+        <td mat-footer-cell *matFooterCellDef> {{footerData.types}} </td>
+      </ng-container>
 
-    <!-- Rating Column -->
-    <ng-container matColumnDef="rating">
-      <th mat-header-cell *matHeaderCellDef> Rating </th>
-      <td mat-cell *matCellDef="let res"> {{res.rating }} </td>
-      <td mat-footer-cell *matFooterCellDef> {{footerData.rating}} </td>
-    </ng-container>
+      <!-- Rating Column -->
+      <ng-container matColumnDef="rating">
+        <th mat-header-cell *matHeaderCellDef> Rating </th>
+        <td mat-cell *matCellDef="let res"> {{res.rating }} </td>
+        <td mat-footer-cell *matFooterCellDef> {{footerData.rating}} </td>
+      </ng-container>
 
-    <!-- #OfRating Column -->
-    <ng-container matColumnDef="noOfRatings">
-      <th mat-header-cell *matHeaderCellDef> # of Ratings </th>
-      <td mat-cell *matCellDef="let res"> {{res.noOfRatings | number }} </td>
-      <td mat-footer-cell *matFooterCellDef> {{footerData.noOfRatings}} </td>
-    </ng-container>
+      <!-- #OfRating Column -->
+      <ng-container matColumnDef="noOfRatings">
+        <th mat-header-cell *matHeaderCellDef> # of Ratings </th>
+        <td mat-cell *matCellDef="let res"> {{res.noOfRatings | number }} </td>
+        <td mat-footer-cell *matFooterCellDef> {{footerData.noOfRatings}} </td>
+      </ng-container>
 
-    <!-- #OfReviews Column -->
-    <ng-container matColumnDef="noOfReviews">
-      <th mat-header-cell *matHeaderCellDef> # of Reviews </th>
-      <td mat-cell *matCellDef="let res"> {{res.noOfReviews }} </td>
-      <td mat-footer-cell *matFooterCellDef> {{footerData.noOfReviews}} </td>
-    </ng-container>
+      <!-- #OfReviews Column -->
+      <ng-container matColumnDef="noOfReviews">
+        <th mat-header-cell *matHeaderCellDef> # of Reviews </th>
+        <td mat-cell *matCellDef="let res"> {{res.noOfReviews }} </td>
+        <td mat-footer-cell *matFooterCellDef> {{footerData.noOfReviews}} </td>
+      </ng-container>
 
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    <tr mat-footer-row *matFooterRowDef="displayedColumns; sticky: true"></tr>
-  </table>
-  <mat-paginator [length]="pageLength" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" showFirstLastButtons>
-  </mat-paginator>
-</div>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      <tr mat-footer-row *matFooterRowDef="displayedColumns; sticky: true"></tr>
+    </table>
+    <mat-paginator [length]="pageLength" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" showFirstLastButtons>
+    </mat-paginator>
+  </mat-card-content>
+</mat-card>
