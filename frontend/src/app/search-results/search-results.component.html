@@ -1,4 +1,24 @@
 <div class="results-container mat-elevation-z8">
+  <!-- <form>
+    <mat-hint>Filter by: </mat-hint>
+    <mat-form-field>
+      <input type="text" placeholder="Rating" formControlName="ratingFilter" matInput
+        [matAutocomplete]="ratingFilterAuto">
+      <mat-autocomplete #typeFilterAuto="matAutocomplete">
+        <mat-option *ngFor="let option of autoRatingFilterOptions | async" [value]="option">{{option}}</mat-option>
+      </mat-autocomplete>
+      <input type="text" placeholder="# of Rating" formControlName="numRatingFilter" matInput
+        [matAutocomplete]="numRatingFilterAuto">
+      <mat-autocomplete #numRatingFilterAuto="matAutocomplete">
+        <mat-option *ngFor="let option of autoNumRatingFilterOptions | async" [value]="option">{{option}}</mat-option>
+      </mat-autocomplete>
+      <input type="text" placeholder="# of Reviews" formControlName="numReviewsFilter" matInput
+        [matAutocomplete]="numReviewsFilterAuto">
+      <mat-autocomplete #numReviewsFilterAuto="matAutocomplete">
+        <mat-option *ngFor="let option of autoNumReviewsFilterOptions | async" [value]="option">{{option}}</mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+  </form> -->
   <table mat-table [dataSource]="dataSource" *ngIf="showResults">
     <!-- Name Column -->
     <ng-container matColumnDef="name">
