@@ -31,7 +31,7 @@
           <input type="text" placeholder="Type of nearby places" formControlName="typeFilter" matInput
             [matAutocomplete]="typeFilterAuto">
           <mat-autocomplete #typeFilterAuto="matAutocomplete">
-            <mat-option *ngFor="let option of autoTypeFilter" [value]="option">{{option}}</mat-option>
+            <mat-option *ngFor="let option of autoTypeFilterOptions | async" [value]="option">{{option}}</mat-option>
           </mat-autocomplete>
         </mat-form-field>
         <mat-slide-toggle formControlName="opennowFilter" labelPosition="before">Open now</mat-slide-toggle>

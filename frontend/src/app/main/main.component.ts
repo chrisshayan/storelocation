@@ -24,7 +24,7 @@ export class MainComponent implements OnInit {
     return {
       query: '',
       radius: 50,
-      typeFilter: null,
+      typeFilter: '',
       opennowFilter: null
     }
   }
