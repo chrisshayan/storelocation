@@ -29,9 +29,9 @@
       <!-- Name Column -->
       <ng-container matColumnDef="name">
         <th mat-header-cell *matHeaderCellDef> Name </th>
-        <td mat-cell *matCellDef="let res">
+        <td mat-cell *matCellDef="let res">{{res.name }} (Coordinate: {{res.coordinate }})
           <a mat-button color="primary" href={{res.gmapLink}} target="_blank" [matTooltip]="showMapToolTip"
-            matTooltipPosition="right">{{res.name }}
+            matTooltipPosition="right">
             <mat-icon>map</mat-icon>
           </a>
         </td>
