@@ -8,20 +8,20 @@
       </mat-autocomplete>
     </mat-form-field>
     <mat-form-field class="filter-box">
-      <input type="text" placeholder="# of Rating" formControlName="numRatings" matInput
-        [matAutocomplete]="numRatingsAuto">
-      <mat-autocomplete #numRatingsAuto="matAutocomplete">
-        <mat-option *ngFor="let option of numRatingsOptions" [value]="option">{{option}}</mat-option>
+      <input type="text" placeholder="# of Rating" formControlName="noOfRatings" matInput
+        [matAutocomplete]="noOfRatingsAuto">
+      <mat-autocomplete #noOfRatingsAuto="matAutocomplete">
+        <mat-option *ngFor="let option of noOfRatingsOptions" [value]="option">{{option}}</mat-option>
       </mat-autocomplete>
     </mat-form-field>
     <mat-form-field class="filter-box">
-      <input type="text" placeholder="# of Reviews" formControlName="numReviews" matInput
-        [matAutocomplete]="numReviewsAuto">
-      <mat-autocomplete #numReviewsAuto="matAutocomplete">
-        <mat-option *ngFor="let option of numReviewsOptions" [value]="option">{{option}}</mat-option>
+      <input type="text" placeholder="# of Reviews" formControlName="noOfReviews" matInput
+        [matAutocomplete]="noOfReviewsAuto">
+      <mat-autocomplete #noOfReviewsAuto="matAutocomplete">
+        <mat-option *ngFor="let option of noOfReviewsOptions" [value]="option">{{option}}</mat-option>
       </mat-autocomplete>
     </mat-form-field>
-    <mat-slide-toggle formControlName="shutdown" labelPosition="before">Permanently Shutdown</mat-slide-toggle>
+    <button type="button" mat-raised-button (click)="onClearFilters()">Clear All Filters</button>
   </form>
 
   <mat-card-content>

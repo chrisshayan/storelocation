@@ -95,11 +95,11 @@ class Place:
             if(len(nearby) > 0):
                 nearby_ids = [n['id'] for n in nearby]
 
-            # arround = [self.e_place_detail(place_id)
-            #            for place_id in nearby_ids]
+            arround = [self.e_place_detail(place_id)
+                       for place_id in nearby_ids]
             # for testing
-            with open('arround.test.json', encoding='utf8') as file:
-                arround = json.loads(file.read())
+            # with open('arround.test.json', encoding='utf8') as file:
+            #     arround = json.loads(file.read())
 
             if(len(arround) > 0):
                 summary = self.t_around_summary(arround)
@@ -108,12 +108,6 @@ class Place:
             duration = end - start
             print('all runtime: ', duration.seconds)
 
-            # return {
-            #     'runtime': duration.seconds,
-            #     'summary': {},
-            #     'origin': {},
-            #     'arround': [],
-            # }
             return {
                 'origin': origin_place,
                 'arround': arround,
@@ -145,7 +139,7 @@ class Place:
             if(opennow):
                 params['opennow'] = opennow
 
-            print('search_place_nearby.params', params)
+            # print('search_place_nearby.params', params)
             nearby = self.gmaps.places_nearby(**params)
             if(nearby['status'] == 'OK'):
                 places = [self.t_place_nearby(place)
@@ -154,7 +148,7 @@ class Place:
                     if(nearby.get('next_page_token')):
                         token = nearby['next_page_token']
                     while(token):
-                        print('get next result: ', token)
+                        # print('get next result: ', token)
                         time.sleep(2)
                         next_nearby = self.gmaps.places_nearby(
                             page_token=token)
@@ -206,7 +200,7 @@ class Place:
         if(opennow):
             params['opennow'] = opennow
 
-        print('params: ', params)
+        # print('params: ', params)
         places = self.search_place_nearby(**params)
         print('places: ', len(places))
 

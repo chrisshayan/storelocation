@@ -31,14 +31,13 @@ export class SearchResultsComponent implements OnInit, AfterViewInit {
   dataSource: MatTableDataSource<PlaceDetail>
 
   ratingOptions: number[] = []
-  numRatingsOptions: number[] = []
-  numReviewsOptions: number[] = []
+  noOfRatingsOptions: number[] = []
+  noOfReviewsOptions: number[] = []
 
   filterForm = this.fb.group({
     rating: [''],
-    numRatings: [''],
-    numReviews: [''],
-    shutdown: ['']
+    noOfRatings: [''],
+    noOfReviews: ['']
   })
 
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator
@@ -46,13 +45,13 @@ export class SearchResultsComponent implements OnInit, AfterViewInit {
   constructor(private fb: FormBuilder) { }
 
   ngOnInit() {
+    // console.log('filterForm', this.filterForm)
     this.data = this.buildData(this.results)
     if (!_.isEmpty(this.data)) {
-      this.ratingOptions = this.buildFilterAutoOptions(this.data, 'rating')
-      this.numRatingsOptions = this.buildFilterAutoOptions(this.data, 'noOfRatings')
-      this.numReviewsOptions = this.buildFilterAutoOptions(this.data, 'noOfReviews')
+      this._buildFormFilterOptions(this.data)
     }
     // on change filters
+    this.onFilters()
 
     // generate dataSource
     this.dataSource = new MatTableDataSource(this.data)
@@ -64,6 +63,43 @@ export class SearchResultsComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator
+  }
+
+  onFilters() {
+    Object.keys(this.filterForm.value).forEach(type => {
+      this.filterForm.get(type).valueChanges.subscribe(value => {
+        if (value) {
+          this._filter(type, value)
+        }
+      })
+    })
+  }
+
+  onClearFilters() {
+    this.dataSource = new MatTableDataSource(this.data)
+    this.pageLength = this.data.length
+    this.dataSource.paginator = this.paginator
+    this._buildFormFilterOptions(this.data)
+    // Reset value of all filters
+    Object.keys(this.filterForm.value).forEach(type => this.filterForm.get(type).setValue(null))
+  }
+
+  private _filter(type, value) {
+    const filteredData = this.data.filter(d => {
+      return d[type] == value
+    })
+    this.dataSource = new MatTableDataSource(filteredData)
+    this.pageLength = filteredData.length
+    this.dataSource.paginator = this.paginator
+
+    // rebuild form filters options
+    this._buildFormFilterOptions(filteredData)
+  }
+
+  private _buildFormFilterOptions(data) {
+    this.ratingOptions = this.buildFilterAutoOptions(data, 'rating')
+    this.noOfRatingsOptions = this.buildFilterAutoOptions(data, 'noOfRatings')
+    this.noOfReviewsOptions = this.buildFilterAutoOptions(data, 'noOfReviews')
   }
 
   buildData(places): PlaceDetail[] {
@@ -123,5 +159,4 @@ export interface PlaceDetail {
   noOfRatings: number
   noOfReviews: number
   gmapLink: string
-  // priceLevel: string
 }
