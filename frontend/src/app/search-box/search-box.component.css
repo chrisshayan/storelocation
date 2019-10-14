@@ -2,6 +2,10 @@
   width: 100%;
 }
 
+.filter-box {
+  margin-right: 16px;
+}
+
 mat-slider {
   width: 300px;
 }

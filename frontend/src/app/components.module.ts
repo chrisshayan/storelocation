@@ -17,6 +17,7 @@ import { ChartsModule } from 'ng2-charts';
 import { NgModule } from '@angular/core';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 @NgModule({
   exports: [
@@ -37,7 +38,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     MatChipsModule,
     ChartsModule,
     MatTableModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatSlideToggleModule
   ]
 })
 export class ComponentsModule { }

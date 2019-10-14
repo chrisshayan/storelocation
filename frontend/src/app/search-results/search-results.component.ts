@@ -3,6 +3,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import _ from 'underscore';
 import { environment } from 'src/environments/environment';
+import { FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'search-results',
@@ -29,18 +30,76 @@ export class SearchResultsComponent implements OnInit, AfterViewInit {
   data: PlaceDetail[] = []
   dataSource: MatTableDataSource<PlaceDetail>
 
+  ratingOptions: number[] = []
+  noOfRatingsOptions: number[] = []
+  noOfReviewsOptions: number[] = []
+
+  filterForm = this.fb.group({
+    rating: [''],
+    noOfRatings: [''],
+    noOfReviews: ['']
+  })
+
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator
 
+  constructor(private fb: FormBuilder) { }
+
   ngOnInit() {
+    // console.log('filterForm', this.filterForm)
     this.data = this.buildData(this.results)
+    if (!_.isEmpty(this.data)) {
+      this._buildFormFilterOptions(this.data)
+    }
+    // on change filters
+    this.onFilters()
+
+    // generate dataSource
     this.dataSource = new MatTableDataSource(this.data)
     this.pageLength = this.data.length
     this.showResults = true
     this.footerData = this.buildFooterData(this.origin)
+
   }
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator
+  }
+
+  onFilters() {
+    Object.keys(this.filterForm.value).forEach(type => {
+      this.filterForm.get(type).valueChanges.subscribe(value => {
+        if (value) {
+          this._filter(type, value)
+        }
+      })
+    })
+  }
+
+  onClearFilters() {
+    this.dataSource = new MatTableDataSource(this.data)
+    this.pageLength = this.data.length
+    this.dataSource.paginator = this.paginator
+    this._buildFormFilterOptions(this.data)
+    // Reset value of all filters
+    Object.keys(this.filterForm.value).forEach(type => this.filterForm.get(type).setValue(null))
+  }
+
+  private _filter(type, value) {
+    const filteredData = this.data.filter(d => {
+      return d[type] == value
+    })
+    this.dataSource = new MatTableDataSource(filteredData)
+    this.pageLength = filteredData.length
+    this.dataSource.paginator = this.paginator
+
+    // rebuild form filters options
+    this._buildFormFilterOptions(filteredData)
+  }
+
+  private _buildFormFilterOptions(data) {
+    this.ratingOptions = this.buildFilterAutoOptions(data, 'rating')
+    this.noOfRatingsOptions = this.buildFilterAutoOptions(data, 'noOfRatings')
+    this.noOfReviewsOptions = this.buildFilterAutoOptions(data, 'noOfReviews')
   }
 
   buildData(places): PlaceDetail[] {
@@ -72,6 +131,10 @@ export class SearchResultsComponent implements OnInit, AfterViewInit {
     }
   }
 
+  buildFilterAutoOptions(options, field) {
+    return _.sortBy(_.uniq(options.map(d => d[field])), op => op)
+  }
+
   getTypesText(types) {
     let text = ''
     if (!_.isEmpty(types)) {
@@ -96,5 +159,4 @@ export interface PlaceDetail {
   noOfRatings: number
   noOfReviews: number
   gmapLink: string
-  // priceLevel: string
 }

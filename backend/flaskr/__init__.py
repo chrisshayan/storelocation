@@ -50,8 +50,11 @@ def create_app(test_config=None):
         result = {}
         query = request.get_json().get('query')
         radius = request.get_json().get('radius')
+        place_type = request.get_json().get('type')
+        opennow = request.get_json().get('opennow')
 
-        search_result = place.search(query=query, radius=radius)
+        search_result = place.search(
+            query=query, radius=radius, place_type=place_type, opennow=opennow)
         if(search_result):
             return jsonify(search_result)
 

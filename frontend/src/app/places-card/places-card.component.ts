@@ -20,9 +20,12 @@ export class PlacesCardComponent implements OnInit {
 
   ngOnInit() {
     // Search Form
+    const searchCriteria = this.searchBox[this.searchType]
     this.searchForm = new FormGroup({
-      query: new FormControl(this.searchBox[this.searchType].query),
-      radius: new FormControl(this.searchBox[this.searchType].radius)
+      query: new FormControl(searchCriteria.query),
+      radius: new FormControl(searchCriteria.radius),
+      typeFilter: new FormControl(searchCriteria.typeFilter),
+      opennowFilter: new FormControl(searchCriteria.opennowFilter),
     })
     this.searchState.currentState.subscribe(state => {
       const { viewMode } = state[this.searchType]

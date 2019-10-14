@@ -2,6 +2,10 @@
   overflow: auto;
 }
 
+.filter-box {
+  margin-right: 16px;
+}
+
 table {
   width: 100%;
 }
