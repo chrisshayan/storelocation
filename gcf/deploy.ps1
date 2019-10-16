@@ -1,0 +1,1 @@
+gcloud functions deploy places --runtime python37 --trigger-http --env-vars-file .env.yaml
