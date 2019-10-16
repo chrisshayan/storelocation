@@ -8,14 +8,13 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./search-summary.component.css']
 })
 export class SearchSummaryComponent implements OnInit {
-  @Input('origin') origin: {
-    id?: string
-  }
+  @Input('origin') origin
   @Input('data') data: {
     ratings?: {},
     reviews?: {},
     types?: {},
-    user_ratings?: {}
+    user_ratings?: {},
+    total?: number
   }
   objectKeys = Object.keys
   showData = false
@@ -30,7 +29,7 @@ export class SearchSummaryComponent implements OnInit {
   typesChartLabels = []
   // ratings chart
   ratingChartLabel = "Ratings"
-  haveRatingChart = false
+  haveRatingsChart = false
   ratingsChart = []
   // reviews chart
   reviewChartLabel = "Reviews"

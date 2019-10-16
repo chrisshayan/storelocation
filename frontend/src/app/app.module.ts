@@ -20,6 +20,8 @@ import { SearchNoresultComponent } from './search-noresult/search-noresult.compo
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
+import { AngularFireFunctionsModule } from '@angular/fire/functions'
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,6 +46,7 @@ import { HttpClientModule } from '@angular/common/http';
     ReactiveFormsModule,
     LayoutModule,
     ComponentsModule,
+    AngularFireFunctionsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
