@@ -20,7 +20,7 @@ export class PlaceAutocompleteService {
   constructor(private http: HttpClient) { }
 
   predict(input: string): Observable<Prediction[]> {
-    const autocompletePlaceUrl = `${environment.apiUrl}/place/autocomplete`
+    const autocompletePlaceUrl = `${environment.apiUrl}/autocomplete`
     return this.http.post<Prediction[]>(autocompletePlaceUrl, JSON.stringify({ input }), this.httpOptions)
   }
 }

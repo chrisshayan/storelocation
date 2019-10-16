@@ -1,9 +1,9 @@
 import googlemaps
 from datetime import datetime
 import time
-from flaskr.config import get_gmaps_config
 import sys
 import json
+import os
 
 
 class Place:
@@ -14,7 +14,7 @@ class Place:
     CREDIT = 0
 
     def __init__(self):
-        api_key = get_gmaps_config()['api_key']
+        api_key = os.environ.get('gmaps_api_key', 'Gmaps API Key is not set!')
         self.gmaps = googlemaps.Client(key=api_key)
 
     def autocomplete(self, input: str, types: list = []):
