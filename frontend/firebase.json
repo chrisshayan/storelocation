@@ -8,8 +8,11 @@
     ],
     "rewrites": [
       {
-        "source": "/places",
-        "function": "places"
+        "source": "/api/**",
+        "run": {
+          "serviceId": "api",
+          "region": "us-central1"
+        }
       },
       {
         "source": "**",

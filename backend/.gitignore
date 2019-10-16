@@ -1,5 +1,5 @@
 # configuration
-*config.py
+*.env.yaml
 .env
 
 # Byte-compiled / optimized / DLL files
