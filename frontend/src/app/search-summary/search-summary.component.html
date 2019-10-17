@@ -20,7 +20,7 @@
         Place Rating
       </mat-panel-title>
       <mat-panel-description>
-        {{origin?.rating}}
+        {{origin?.rating | number:'1.0-2'}}
       </mat-panel-description>
     </mat-expansion-panel-header>
   </mat-expansion-panel>
@@ -76,7 +76,7 @@
     </mat-expansion-panel-header>
     <mat-chip-list *ngIf="data.ratings">
       <mat-chip color="accent" class="types-mat-chip" *ngFor="let rate of objectKeys(data.ratings)">
-        <span matBadge={{data.ratings[rate]}} matBadgeOverlap="false">{{rate}}</span>
+        <span matBadge={{data.ratings[rate]}} matBadgeOverlap="false">{{rate | number:'1.0-2'}}</span>
       </mat-chip>
     </mat-chip-list>
   </mat-expansion-panel>

@@ -26,6 +26,12 @@ Go to project folder `cd backend`
 
 Install requirements packages `pipenv install`
 
-Edit configuration for using google api and mongo db atlas `vi flaskr/config.py`
-
-Run `pipenv shell && flask run` for a dev server. Navigate to `http://localhost:5000/`. The app will automatically reload if you change any of the source files.
+Run 
+```
+pipenv shell 
+$env:FLASK_APP = "app.py"
+$env:FLASK_ENV="development"
+$env:gmaps_api_key = "Enter the google maps api key"
+flask run
+```
+ for a dev server. Navigate to `http://localhost:5000/`. The app will automatically reload if you change any of the source files.

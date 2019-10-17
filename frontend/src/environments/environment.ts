@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   gmapsPlaceRedirect: 'https://www.google.com/maps/place/?q=place_id:',
-  apiUrl: 'http://127.0.0.1:5000'
+  apiUrl: 'http://localhost:5000/api/place'
 };
 
 /*
