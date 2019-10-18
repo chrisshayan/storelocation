@@ -1,11 +1,14 @@
 from api.place import Place
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 import os
 import json
 
 
 # Create and Configure the app
 app = Flask(__name__, instance_relative_config=True)
+if(os.environ.get('FLASK_ENV') == 'development'):
+    CORS(app)
 
 # initiate place
 place = Place()
