@@ -5,12 +5,12 @@ import os
 import json
 
 
-# Create and Configure the app
+# Initialize Flask app
 app = Flask(__name__, instance_relative_config=True)
 if(os.environ.get('FLASK_ENV') == 'development'):
     CORS(app)
 
-# initiate place
+# Initialize place
 place = Place()
 
 

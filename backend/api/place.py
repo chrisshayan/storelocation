@@ -4,6 +4,7 @@ import time
 import sys
 import json
 import os
+from firebase_admin import credentials, firestore, initialize_app, exceptions
 
 
 class Place:
@@ -16,6 +17,12 @@ class Place:
     def __init__(self):
         api_key = os.environ.get('gmaps_api_key', 'Gmaps API Key is not set!')
         self.gmaps = googlemaps.Client(key=api_key)
+
+        # Initialize Firestore DB
+        cred = credentials.Certificate('firestore_key.json')
+        initialize_app(cred)
+        self.db = firestore.client()
+        self.collection = self.db.collection('places')
 
     def autocomplete(self, input: str, types: list = []):
         try:
@@ -40,7 +47,7 @@ class Place:
         try:
             self.CREDIT = 0
             start = datetime.now()
-
+            placeSearchData = {}
             arround = []
             origin_place = {}
             summary = {}
@@ -108,12 +115,17 @@ class Place:
             duration = end - start
             print('all runtime: ', duration.seconds)
 
-            return {
+            placeSearchData = {
                 'origin': origin_place,
                 'arround': arround,
                 'summary': summary,
                 'runtime': duration.seconds
             }
+
+            # Save place search data into Firestore
+            self.addPlaceSearch(placeSearchData)
+
+            return placeSearchData
         except Exception as e:
             print('search.error: ', e)
 
@@ -202,7 +214,7 @@ class Place:
 
         # print('params: ', params)
         places = self.search_place_nearby(**params)
-        print('places: ', len(places))
+        # print('places: ', len(places))
 
         return places
 
@@ -261,11 +273,11 @@ class Place:
         rev = []
         if reviews and len(reviews) > 0:
             rev = [{
-                'author': r.get('author_name'),
+                # 'author': r.get('author_name'),
                 'rating': r.get('rating'),
                 'time': r.get('time'),
                 'relative_time': r.get('relative_time_description'),
-                'text': r.get('text')
+                # 'text': r.get('text')
             } for r in reviews]
         return rev
 
@@ -310,18 +322,25 @@ class Place:
             # Summary
             # rating
             summary['ratings'] = {
-                r: ratings.count(r) for r in list(set(ratings))}
+                str(r): ratings.count(r) for r in list(set(ratings))}
             # user_ratings_total
-            summary['user_ratings'] = {
-                r: user_ratings.count(r) for r in list(set(user_ratings))}
+            summary['user_ratings'] = {str(r): user_ratings.count(
+                r) for r in list(set(user_ratings))}
             # types
-            summary['types'] = {ut: types.count(
+            summary['types'] = {str(ut): types.count(
                 ut) for ut in list(set(types))}
             # reviews
             summary['reviews'] = {
-                r: reviews.count(r) for r in list(set(reviews))}
+                str(r): reviews.count(r) for r in list(set(reviews))}
 
         return summary
+
+    def addPlaceSearch(self, placeSearchData):
+        try:
+            placeSearchData['searchTime'] = datetime.now()
+            return self.collection.add(placeSearchData)
+        except exceptions.FirebaseError as e:
+            return f"An Error Occured: {e}"
 
     def get_highest_matched_place(self, places, coordinate):
         place = [p for p in places if p['coordinate'] == coordinate]
