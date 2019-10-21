@@ -8,7 +8,7 @@ WORKDIR $APP_HOME
 COPY . ./
 
 # Install production dependencies.
-RUN pip install Flask==1.1.1 gunicorn googlemaps==3.1.2
+RUN pip install Flask==1.1.1 gunicorn googlemaps==3.1.2 firebase-admin==3.0.0 flask-cors==3.0.8
 
 # Run the web service on container startup. Here we use the gunicorn
 # webserver, with one worker process and 8 threads.
