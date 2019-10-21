@@ -337,6 +337,7 @@ class Place:
 
     def addPlaceSearch(self, placeSearchData):
         try:
+            placeSearchData['searchTime'] = datetime.now()
             return self.collection.add(placeSearchData)
         except exceptions.FirebaseError as e:
             return f"An Error Occured: {e}"
