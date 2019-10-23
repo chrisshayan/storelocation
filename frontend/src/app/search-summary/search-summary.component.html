@@ -90,7 +90,8 @@
         The Scatter Chart for Rating of the Nearby Places
       </mat-panel-description>
     </mat-expansion-panel-header>
-    <charts-scatter *ngIf="haveRatingsChart" [data]="ratingsChart" [label]="ratingChartLabel"></charts-scatter>
+    <charts-scatter *ngIf="haveRatingsChart" [data]="ratingsChart" [label]="ratingChartLabel"
+      [xAxisLabel]="'Rating Score'" [yAxisLabel]="'Count # of Ratings'"></charts-scatter>
   </mat-expansion-panel>
   <!-- Chart Users Rating -->
   <mat-expansion-panel>
@@ -102,7 +103,8 @@
         The Scatter Chart for User Ratings Total of the Nearby Places
       </mat-panel-description>
     </mat-expansion-panel-header>
-    <charts-scatter *ngIf="haveUserRatingsChart" [data]="userRatingsChart" [label]="userRatingChartLabel">
+    <charts-scatter *ngIf="haveUserRatingsChart" [data]="userRatingsChart" [label]="userRatingChartLabel"
+      [xAxisLabel]="'# User Ratings'" [yAxisLabel]="'Count # of User Ratings'">
     </charts-scatter>
   </mat-expansion-panel>
   <!-- Chart Reviews -->
@@ -115,6 +117,7 @@
         The Scatter Chart for Reviews of the Nearby Places
       </mat-panel-description>
     </mat-expansion-panel-header>
-    <charts-scatter *ngIf="haveReviewsChart" [data]="reviewsChart" [label]="reviewChartLabel"></charts-scatter>
+    <charts-scatter *ngIf="haveReviewsChart" [data]="reviewsChart" [label]="reviewChartLabel" [xAxisLabel]="'# Reviews'"
+      [yAxisLabel]="'Count # of Reviews'"></charts-scatter>
   </mat-expansion-panel>
 </mat-accordion>
