@@ -20,7 +20,8 @@ import { SearchNoresultComponent } from './search-noresult/search-noresult.compo
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
-import { AngularFireFunctionsModule } from '@angular/fire/functions'
+import { AngularFireFunctionsModule } from '@angular/fire/functions';
+import { JsonViewerComponent } from './json-viewer/json-viewer.component'
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { AngularFireFunctionsModule } from '@angular/fire/functions'
     ChartsScatterComponent,
     SearchResultsComponent,
     PlaceDetailComponent,
-    SearchNoresultComponent
+    SearchNoresultComponent,
+    JsonViewerComponent
   ],
   imports: [
     BrowserModule,
