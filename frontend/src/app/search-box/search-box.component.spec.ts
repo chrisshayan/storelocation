@@ -1,6 +1,15 @@
+import { HttpClientModule } from '@angular/common/http';
+import { MatCardModule } from '@angular/material/card';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatSliderModule } from '@angular/material/slider';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatInputModule } from '@angular/material/input';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { ReactiveFormsModule } from '@angular/forms';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SearchBoxComponent } from './search-box.component';
+import { MatIconModule } from '@angular/material/icon';
 
 describe('SearchBoxComponent', () => {
   let component: SearchBoxComponent;
@@ -8,9 +17,11 @@ describe('SearchBoxComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SearchBoxComponent ]
+      declarations: [SearchBoxComponent],
+      imports: [ReactiveFormsModule, MatAutocompleteModule, MatInputModule, MatTooltipModule, MatIconModule,
+        MatSliderModule, MatSlideToggleModule, MatAutocompleteModule, MatCardModule, MatAutocompleteModule, HttpClientModule]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
@@ -22,4 +33,6 @@ describe('SearchBoxComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+
 });

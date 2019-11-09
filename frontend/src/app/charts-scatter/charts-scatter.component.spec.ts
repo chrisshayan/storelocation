@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ChartsScatterComponent } from './charts-scatter.component';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('ChartsScatterComponent', () => {
   let component: ChartsScatterComponent;
@@ -8,9 +9,10 @@ describe('ChartsScatterComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ChartsScatterComponent ]
+      declarations: [ChartsScatterComponent],
+      schemas: [NO_ERRORS_SCHEMA]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
@@ -19,7 +21,7 @@ describe('ChartsScatterComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should create charts-scatter component', () => {
     expect(component).toBeTruthy();
   });
 });

@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { SearchStateService } from '../search-state.service';
 import _ from 'underscore';
 
@@ -16,18 +16,19 @@ export class PlacesCardComponent implements OnInit {
   showSearchContent: boolean = false
 
   showContent: boolean = false
-  constructor(fb: FormBuilder, private searchState: SearchStateService) {
+  constructor(private fb: FormBuilder, private searchState: SearchStateService) {
+  }
+
+  ngOnInit() {
     // Search Form
     const searchCriteria = this.searchBox[this.searchType]
-    this.searchForm = fb.group({
-      query: [searchCriteria.query],
+    this.searchForm = this.fb.group({
+      query: [searchCriteria.query, Validators.required],
       radius: [searchCriteria.radius],
       typeFilter: [searchCriteria.typeFilter],
       opennowFilter: [searchCriteria.opennowFilter]
     })
-  }
 
-  ngOnInit() {
     this.searchState.currentState.subscribe(state => {
       const { viewMode } = state[this.searchType]
       if (!_.isEmpty(viewMode)) { this.showSearchContent = true }

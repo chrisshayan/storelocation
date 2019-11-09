@@ -1,3 +1,4 @@
+import { MatInputModule } from '@angular/material/input';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SearchNoresultComponent } from './search-noresult.component';
@@ -8,9 +9,10 @@ describe('SearchNoresultComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SearchNoresultComponent ]
+      declarations: [SearchNoresultComponent],
+      imports: [MatInputModule]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

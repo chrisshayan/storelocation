@@ -63,10 +63,16 @@ export class SearchBoxComponent implements OnInit {
     return []
   }
 
+  getSearchQuery(query) {
+    let searchQuery = query
+    const place = this.predictions.filter(p => p.name === searchQuery)
+    searchQuery = !_.isEmpty(place) ? place[0].id : searchQuery
+    return searchQuery
+  }
+
   onSearch() {
     let { query, radius, typeFilter, opennowFilter } = this.searchForm.value
-    const place = this.predictions.filter(p => p.name === query)
-    query = !_.isEmpty(place) ? place[0].id : query
+    query = this.getSearchQuery(query)
     // console.log('search values: ', this.searchForm.value)
 
     this.searchState.update(this.currentState, { [this.searchType]: { viewMode: 'searching' } })
