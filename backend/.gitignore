@@ -1,5 +1,6 @@
 # dev script
 start_dev.ps1
+start_dev.sh
 
 # configuration
 *.env.yaml
