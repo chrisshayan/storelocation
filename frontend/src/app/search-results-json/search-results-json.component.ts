@@ -8,5 +8,6 @@ import { Component, Input } from '@angular/core';
 export class SearchResultsJsonComponent {
 
   @Input('jsonContent') jsonContent = {}
+  @Input('fileUrl') fileUrl = ''
 
 }

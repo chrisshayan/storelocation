@@ -78,10 +78,11 @@ export class SearchBoxComponent implements OnInit {
     this.searchState.update(this.currentState, { [this.searchType]: { viewMode: 'searching' } })
 
     this.placesSearch.search(query, radius, { type: typeFilter, opennow: opennowFilter }).subscribe(results => {
-      const { summary, origin, arround } = results
+      console.log('results: ', results)
+      const { summary, origin, arround, url } = results
       let newState = {}
       if (!_.isEmpty(origin) && (!_.isEmpty(summary) || !_.isEmpty(arround))) {
-        newState = { [this.searchType]: { viewMode: 'summary', summary, origin, arround } }
+        newState = { [this.searchType]: { viewMode: 'summary', summary, origin, arround, url } }
       } else {
         newState = { [this.searchType]: { viewMode: 'noResult' } }
       }

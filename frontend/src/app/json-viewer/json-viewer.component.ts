@@ -25,6 +25,7 @@ export class JsonViewerComponent {
   //   }
   // };
   @Input('data') data: {}
+  @Input('expanded') expanded: boolean
 
   get code() {
     return JSON.stringify(this.data, null, 2);
