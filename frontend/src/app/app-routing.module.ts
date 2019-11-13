@@ -8,8 +8,7 @@ import { SearchResultsComponent } from './search-results/search-results.componen
 const routes: Routes = [
   { path: '', redirectTo: '/main', pathMatch: 'full' },
   { path: 'main', component: MainComponent },
-  { path: 'results', component: SearchResultsComponent },
-  { path: 'json-view', component: JsonViewerComponent }
+  { path: 'results', component: SearchResultsComponent }
 ];
 
 @NgModule({
