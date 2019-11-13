@@ -1,3 +1,4 @@
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { ChartsModule } from 'ng2-charts';
 import { MatPaginatorModule } from '@angular/material/paginator';
@@ -39,7 +40,7 @@ describe('MainComponent', () => {
         SearchResultsComponent, PlaceDetailComponent, SearchNoresultComponent, ChartsLineComponent, ChartsScatterComponent],
       imports: [MatGridListModule, ReactiveFormsModule, MatAutocompleteModule, MatInputModule, MatTooltipModule,
         MatIconModule, MatSliderModule, MatSlideToggleModule, MatCardModule, MatProgressSpinnerModule, MatExpansionModule,
-        MatBadgeModule, MatChipsModule, MatTableModule, MatPaginatorModule, ChartsModule, HttpClientModule]
+        MatBadgeModule, MatChipsModule, MatTableModule, MatPaginatorModule, ChartsModule, HttpClientModule, BrowserAnimationsModule]
     })
       .compileComponents();
   }));

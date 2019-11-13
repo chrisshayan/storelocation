@@ -8,7 +8,7 @@ import _ from 'underscore';
   styleUrls: ['./search-content.component.css']
 })
 export class SearchContentComponent implements OnInit {
-  @Input('searchType') searchType: string
+  @Input('searchType') searchType: string = 'base'
   viewMode = '' // searching | summary | results | detail | noResult | ''
   summary = {}
   origin = {}

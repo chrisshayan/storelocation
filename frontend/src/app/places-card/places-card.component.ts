@@ -9,7 +9,7 @@ import _ from 'underscore';
   styleUrls: ['./places-card.component.css']
 })
 export class PlacesCardComponent implements OnInit {
-  @Input('searchType') searchType: string
+  @Input('searchType') searchType: string = 'base'
   @Input('searchBox') searchBox
 
   searchForm: FormGroup

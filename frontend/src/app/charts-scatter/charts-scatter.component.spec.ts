@@ -3,7 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ChartsScatterComponent } from './charts-scatter.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 
-describe('ChartsScatterComponent', () => {
+xdescribe('ChartsScatterComponent', () => {
   let component: ChartsScatterComponent;
   let fixture: ComponentFixture<ChartsScatterComponent>;
 

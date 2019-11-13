@@ -11,7 +11,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { SearchSummaryComponent } from './search-summary.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 
-describe('SearchSummaryComponent', () => {
+xdescribe('SearchSummaryComponent', () => {
   let component: SearchSummaryComponent;
   let fixture: ComponentFixture<SearchSummaryComponent>;
 
