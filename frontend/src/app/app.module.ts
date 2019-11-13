@@ -21,7 +21,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AngularFireFunctionsModule } from '@angular/fire/functions';
-import { JsonViewerComponent } from './json-viewer/json-viewer.component'
+import { JsonViewerComponent } from './json-viewer/json-viewer.component';
+import { SearchResultsJsonComponent } from './search-results-json/search-results-json.component'
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { JsonViewerComponent } from './json-viewer/json-viewer.component'
     SearchResultsComponent,
     PlaceDetailComponent,
     SearchNoresultComponent,
-    JsonViewerComponent
+    JsonViewerComponent,
+    SearchResultsJsonComponent
   ],
   imports: [
     BrowserModule,

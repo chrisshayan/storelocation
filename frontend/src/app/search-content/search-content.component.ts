@@ -14,6 +14,7 @@ export class SearchContentComponent implements OnInit {
   origin = {}
   arround = []
   actions = ['compare', 'view summary', 'view results', 'no compare']
+  jsonContent = {}
 
   currentState = {}
 
@@ -27,6 +28,7 @@ export class SearchContentComponent implements OnInit {
       this.summary = summary
       this.origin = origin
       this.arround = arround
+      this.jsonContent = { summary, origin, arround }
     })
   }
 
@@ -41,6 +43,10 @@ export class SearchContentComponent implements OnInit {
       case 'view results': {
         return this.searchState.update(this.currentState,
           { [this.searchType]: { ...this.currentState[this.searchType], viewMode: 'results' } })
+      }
+      case 'view results-json': {
+        return this.searchState.update(this.currentState,
+          { [this.searchType]: { ...this.currentState[this.searchType], viewMode: 'results-json' } })
       }
       case 'view summary': {
         return this.searchState.update(this.currentState,

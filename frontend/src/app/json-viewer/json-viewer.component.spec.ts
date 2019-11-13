@@ -19,7 +19,7 @@ describe('JsonViewerComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create json viewer component', () => {
+  it('should create', () => {
     expect(component).toBeTruthy();
   });
 });

@@ -27,6 +27,7 @@
     "firebase": "^7.2.0",
     "hammerjs": "^2.0.8",
     "ng2-charts": "^2.3.0",
+    "ngx-json-viewer": "^2.4.0",
     "rxjs": "~6.4.0",
     "tslib": "^1.10.0",
     "underscore": "^1.9.1",

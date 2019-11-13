@@ -20,6 +20,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { SearchContentComponent } from './search-content.component';
 import { SearchSummaryComponent } from '../search-summary/search-summary.component';
 import { SearchResultsComponent } from '../search-results/search-results.component';
+import { SearchResultsJsonComponent } from '../search-results-json/search-results-json.component';
 
 describe('SearchContentComponent', () => {
   let component: SearchContentComponent;
@@ -28,7 +29,7 @@ describe('SearchContentComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
-        SearchContentComponent, SearchSummaryComponent, SearchResultsComponent, PlaceDetailComponent,
+        SearchContentComponent, SearchSummaryComponent, SearchResultsComponent, SearchResultsJsonComponent, PlaceDetailComponent,
         SearchNoresultComponent, ChartsLineComponent, ChartsScatterComponent],
       imports: [
         MatProgressSpinnerModule, MatCardModule, MatExpansionModule, MatTooltipModule,

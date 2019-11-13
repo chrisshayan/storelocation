@@ -5,6 +5,8 @@
       <search-summary *ngSwitchCase="'summary'" [data]="summary" [origin]="origin"></search-summary>
       <!-- results -->
       <search-results *ngSwitchCase="'results'" [results]="arround" [origin]="origin"></search-results>
+      <!-- results in json -->
+      <search-results-json *ngSwitchCase="'results-json'" [jsonContent]="jsonContent"></search-results-json>
       <!-- detail -->
       <place-detail *ngSwitchCase="'detail'" [place]="origin"></place-detail>
       <!-- no result -->
@@ -16,6 +18,7 @@
       <button mat-raised-button *ngIf="searchType === 'base'" (click)="onClickAction('compare')">COMPARE</button>
       <button mat-raised-button (click)="onClickAction('view summary')">VIEW SUMMARY</button>
       <button mat-raised-button (click)="onClickAction('view results')">VIEW RESULTS</button>
+      <button mat-raised-button (click)="onClickAction('view results-json')">VIEW JSON RESULTS</button>
       <button mat-raised-button *ngIf="searchType === 'compare'" (click)="onClickAction('no compare')">NO
         COMPARE</button>
     </mat-card-actions>
