@@ -18,6 +18,7 @@ import { NgModule } from '@angular/core';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { NgxJsonViewerModule } from 'ngx-json-viewer';
 
 @NgModule({
   exports: [
@@ -39,7 +40,8 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     ChartsModule,
     MatTableModule,
     MatPaginatorModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    NgxJsonViewerModule
   ]
 })
 export class ComponentsModule { }

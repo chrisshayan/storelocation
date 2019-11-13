@@ -6,12 +6,6 @@ verify_ssl = true
 [dev-packages]
 
 [packages]
-flask = "==1.1.1"
-googlemaps = "==3.1.2"
-flask-cors = "*"
-firebase-admin = "*"
-boto3 = "*"
-pytest = "*"
 
 [requires]
 python_version = "3.8"

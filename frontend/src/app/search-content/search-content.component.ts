@@ -8,12 +8,14 @@ import _ from 'underscore';
   styleUrls: ['./search-content.component.css']
 })
 export class SearchContentComponent implements OnInit {
-  @Input('searchType') searchType: string
+  @Input('searchType') searchType: string = 'base'
   viewMode = '' // searching | summary | results | detail | noResult | ''
   summary = {}
   origin = {}
   arround = []
   actions = ['compare', 'view summary', 'view results', 'no compare']
+  jsonContent = {}
+  fileUrl = ''
 
   currentState = {}
 
@@ -22,11 +24,14 @@ export class SearchContentComponent implements OnInit {
   ngOnInit() {
     this.searchState.currentState.subscribe(state => {
       this.currentState = state
-      const { viewMode, summary, origin, arround } = state[this.searchType]
+      const { viewMode, summary, origin, arround, url } = state[this.searchType]
       this.viewMode = viewMode
       this.summary = summary
       this.origin = origin
       this.arround = arround
+      this.fileUrl = url
+      this.jsonContent = { summary, origin, arround }
+      console.log('fileUrl: ', this.fileUrl)
     })
   }
 
@@ -41,6 +46,10 @@ export class SearchContentComponent implements OnInit {
       case 'view results': {
         return this.searchState.update(this.currentState,
           { [this.searchType]: { ...this.currentState[this.searchType], viewMode: 'results' } })
+      }
+      case 'view results-json': {
+        return this.searchState.update(this.currentState,
+          { [this.searchType]: { ...this.currentState[this.searchType], viewMode: 'results-json' } })
       }
       case 'view summary': {
         return this.searchState.update(this.currentState,

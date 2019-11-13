@@ -35,6 +35,7 @@ export interface SearchResult {
   origin?: Place
   summary?: PlaceSummary
   runtime?: number
+  url: string
 }
 
 @Injectable({

@@ -1,0 +1,27 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: Mekong Resources Template
+Resources:
+  MekongSourceBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: mekong-source
+      Tags:
+        - Key: Environment
+          Value: Management
+  MekongSAMBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: mekong-sam
+      Tags:
+        - Key: Environment
+          Value: Management
+  MekongTempBucket:
+    Type: AWS::S3::Bucket
+    Description: Mekong Temporary Bucket for storing public file, file will be deleted after 1 day automatically
+    Properties:
+      BucketName: mekong-temp
+      LifecycleConfiguration:
+        Rules:
+          - Id: DeleteFileAfter1Day
+            Status: Enabled
+            ExpirationInDays: 1

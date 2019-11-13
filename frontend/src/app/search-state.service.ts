@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
 export interface SearchState {
-  viewMode: string  // searching | summary | results | detail | noResult | ''
+  viewMode: string  // searching | summary | results | results-json | detail | noResult | ''
   summary: any
   origin: any
   arround: any

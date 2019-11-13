@@ -1,0 +1,9 @@
+<mat-card class="results-json-container mat-elevation-z8">
+
+  <mat-card-content>
+    <json-viewer [data]="jsonContent" [expanded]="false"></json-viewer>
+  </mat-card-content>
+  <mat-card-actions>
+    <a mat-raised-button color="accent" href="{{fileUrl}}">EXPORT JSON</a>
+  </mat-card-actions>
+</mat-card>

@@ -5,6 +5,7 @@ import sys
 import json
 import os
 from firebase_admin import credentials, firestore, initialize_app, exceptions
+from .s3 import AwsS3
 
 
 class Place:
@@ -23,6 +24,7 @@ class Place:
         initialize_app(cred)
         self.db = firestore.client()
         self.collection = self.db.collection('places')
+        self.s3 = AwsS3()
 
     def autocomplete(self, input: str, types: list = []):
         try:
@@ -119,11 +121,19 @@ class Place:
                 'origin': origin_place,
                 'arround': arround,
                 'summary': summary,
-                'runtime': duration.seconds
+                'runtime': str(duration.seconds)
             }
+            print('placeSearchData: ', placeSearchData)
+            print('type runtime', placeSearchData.get('runtime'))
 
             # Save place search data into Firestore
-            self.addPlaceSearch(placeSearchData)
+            addPlaceResult = self.addPlaceSearch(placeSearchData)
+            # print('search id: ', id)
+
+            s3_file_name = end.__str__()
+            uploadResult = self.s3.upload(s3_file_name, placeSearchData)
+            if uploadResult:
+                placeSearchData['url'] = f"{uploadResult}"
 
             return placeSearchData
         except Exception as e:
