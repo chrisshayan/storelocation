@@ -1,3 +1,6 @@
+import { NgxJsonViewerModule } from 'ngx-json-viewer';
+import { JsonViewerComponent } from './../json-viewer/json-viewer.component';
+import { SearchResultsJsonComponent } from './../search-results-json/search-results-json.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { ChartsModule } from 'ng2-charts';
@@ -37,10 +40,11 @@ describe('MainComponent', () => {
     TestBed.configureTestingModule({
       declarations: [
         MainComponent, PlacesCardComponent, SearchBoxComponent, SearchContentComponent, SearchSummaryComponent,
-        SearchResultsComponent, PlaceDetailComponent, SearchNoresultComponent, ChartsLineComponent, ChartsScatterComponent],
+        SearchResultsComponent, PlaceDetailComponent, SearchNoresultComponent, ChartsLineComponent, ChartsScatterComponent,
+        SearchResultsJsonComponent, JsonViewerComponent],
       imports: [MatGridListModule, ReactiveFormsModule, MatAutocompleteModule, MatInputModule, MatTooltipModule,
         MatIconModule, MatSliderModule, MatSlideToggleModule, MatCardModule, MatProgressSpinnerModule, MatExpansionModule,
-        MatBadgeModule, MatChipsModule, MatTableModule, MatPaginatorModule, ChartsModule, HttpClientModule, BrowserAnimationsModule]
+        MatBadgeModule, MatChipsModule, MatTableModule, MatPaginatorModule, ChartsModule, HttpClientModule, BrowserAnimationsModule, NgxJsonViewerModule]
     })
       .compileComponents();
   }));

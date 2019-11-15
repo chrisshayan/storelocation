@@ -1,3 +1,5 @@
+import { NgxJsonViewerModule } from 'ngx-json-viewer';
+import { MatCardModule } from '@angular/material/card';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SearchResultsJsonComponent } from './search-results-json.component';
@@ -9,7 +11,8 @@ describe('SearchResultsJsonComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [SearchResultsJsonComponent, JsonViewerComponent]
+      declarations: [SearchResultsJsonComponent, JsonViewerComponent],
+      imports: [MatCardModule, NgxJsonViewerModule]
     })
       .compileComponents();
   }));

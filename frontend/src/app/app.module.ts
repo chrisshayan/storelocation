@@ -22,7 +22,8 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AngularFireFunctionsModule } from '@angular/fire/functions';
 import { JsonViewerComponent } from './json-viewer/json-viewer.component';
-import { SearchResultsJsonComponent } from './search-results-json/search-results-json.component'
+import { SearchResultsJsonComponent } from './search-results-json/search-results-json.component';
+import { CollectPlacesComponent } from './collect-places/collect-places.component'
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { SearchResultsJsonComponent } from './search-results-json/search-results
     PlaceDetailComponent,
     SearchNoresultComponent,
     JsonViewerComponent,
-    SearchResultsJsonComponent
+    SearchResultsJsonComponent,
+    CollectPlacesComponent
   ],
   imports: [
     BrowserModule,

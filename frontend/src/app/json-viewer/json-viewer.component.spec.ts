@@ -1,3 +1,4 @@
+import { NgxJsonViewerModule } from 'ngx-json-viewer';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { JsonViewerComponent } from './json-viewer.component';
@@ -8,7 +9,8 @@ describe('JsonViewerComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [JsonViewerComponent]
+      declarations: [JsonViewerComponent],
+      imports: [NgxJsonViewerModule]
     })
       .compileComponents();
   }));

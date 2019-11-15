@@ -1,3 +1,4 @@
+import { NgxJsonViewerModule } from 'ngx-json-viewer';
 import { ChartsModule } from 'ng2-charts';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
@@ -21,6 +22,7 @@ import { SearchContentComponent } from './search-content.component';
 import { SearchSummaryComponent } from '../search-summary/search-summary.component';
 import { SearchResultsComponent } from '../search-results/search-results.component';
 import { SearchResultsJsonComponent } from '../search-results-json/search-results-json.component';
+import { JsonViewerComponent } from '../json-viewer/json-viewer.component';
 
 describe('SearchContentComponent', () => {
   let component: SearchContentComponent;
@@ -30,11 +32,11 @@ describe('SearchContentComponent', () => {
     TestBed.configureTestingModule({
       declarations: [
         SearchContentComponent, SearchSummaryComponent, SearchResultsComponent, SearchResultsJsonComponent, PlaceDetailComponent,
-        SearchNoresultComponent, ChartsLineComponent, ChartsScatterComponent],
+        SearchNoresultComponent, ChartsLineComponent, ChartsScatterComponent, JsonViewerComponent],
       imports: [
         MatProgressSpinnerModule, MatCardModule, MatExpansionModule, MatTooltipModule,
         MatIconModule, MatBadgeModule, MatChipsModule, ReactiveFormsModule, MatInputModule,
-        MatAutocompleteModule, MatTableModule, MatPaginatorModule, ChartsModule]
+        MatAutocompleteModule, MatTableModule, MatPaginatorModule, ChartsModule, NgxJsonViewerModule]
     })
       .compileComponents();
   }));
