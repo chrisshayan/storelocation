@@ -1,1 +1,86 @@
-<p>collect-places works!</p>
+<mat-grid-list cols="1">
+  <mat-grid-tile class="collect-places">
+    <section class="collect-places-card">
+      <mat-card class="add-place-box">
+        <mat-card-content>
+          <div class="add-condition-section">
+            <form [formGroup]="conditionForm" (ngSubmit)="addCondition()">
+              <div class="search-section">
+                <mat-form-field class="search-box">
+                  <input formControlName="search" required type="search" matInput maxlength="256"
+                    placeholder="Search by coordinate or name of Place" [matAutocomplete]="auto"
+                    (keyup)="autocomplete($event)">
+                  <mat-hint>Ex. Coordinate: 10.797463,106.687569. </mat-hint>
+                  <mat-autocomplete #auto="matAutocomplete">
+                    <mat-option *ngFor="let option of options" [value]="option">{{ option }}</mat-option>
+                  </mat-autocomplete>
+                  <!-- <mat-error *ngIf="baseSearch.invalid && baseSearch.errors.required">Please search something.</mat-error> -->
+                  <mat-error *ngIf="search.touched && search.errors?.required">Please search a place or enter a
+                    coordinate.</mat-error>
+                </mat-form-field>
+              </div>
+              <div class="radius-section">
+                <mat-hint>Choose radius </mat-hint>
+                <button type="button" mat-icon-button color="accent" [matTooltip]="radiusToolTip"
+                  matTooltipPosition="right">
+                  <mat-icon>info</mat-icon>
+                </button>
+                <mat-slider formControlName="radius" [max]="maxRadius" [min]="minRadius" thumbLabel>
+                </mat-slider>
+                <span matSuffix>Meters.</span>
+              </div>
+              <button type="button" mat-raised-button color="primary" (click)="addCondition()">Add <mat-icon>add
+                </mat-icon></button>
+            </form>
+          </div>
+          <div class="list-conditions-section">
+            <table mat-table [dataSource]="dataSource" #conditionsData *ngIf="showConditions">
+              <!-- ID -->
+              <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef> ID </th>
+                <td mat-cell *matCellDef="let condition"> {{condition.id}} </td>
+              </ng-container>
+              <!-- name -->
+              <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef> Name </th>
+                <td mat-cell *matCellDef="let condition"> {{condition.name}} </td>
+              </ng-container>
+              <!-- radius -->
+              <ng-container matColumnDef="radius">
+                <th mat-header-cell *matHeaderCellDef> Radius </th>
+                <td mat-cell *matCellDef="let condition"> {{condition.radius}} </td>
+              </ng-container>
+              <!-- action -->
+              <ng-container matColumnDef="action">
+                <th mat-header-cell *matHeaderCellDef> Action </th>
+                <td mat-cell *matCellDef="let condition">
+                  <button type="button" mat-icon-button color="warn" aria-label="remove condition"
+                    (click)="removeCondition(condition)">
+                    <mat-icon>delete_sweep</mat-icon>
+                  </button> </td>
+              </ng-container>
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+            </table>
+          </div>
+          <div class="email-me-section">
+            <form [formGroup]="emailMeForm" (ngSubmit)="emailMe()">
+              <div class="email-section">
+                <mat-form-field class="email-box">
+                  <input formControlName="email" required matInput maxlength="50"
+                    placeholder="Email to send the places information when collecting done.">
+                  <mat-hint>Ex. email@example.com</mat-hint>
+                  <mat-error *ngIf="email.touched && email.errors?.email">Please enter the valid email address.
+                  </mat-error>
+                  <mat-error *ngIf="email.touched && email.errors?.required">Email address cannot be empty.</mat-error>
+                </mat-form-field>
+              </div>
+              <button mat-raised-button color="accent">Email me <mat-icon>email</mat-icon></button>
+            </form>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </section>
+  </mat-grid-tile>
+</mat-grid-list>
