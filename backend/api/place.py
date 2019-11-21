@@ -352,6 +352,9 @@ class Place:
         except exceptions.FirebaseError as e:
             return f"An Error Occured: {e}"
 
+    def collect_places(self, conditions: list, email: str):
+        results = []
+
     def get_highest_matched_place(self, places, coordinate):
         place = [p for p in places if p['coordinate'] == coordinate]
         if(len(place) > 0):

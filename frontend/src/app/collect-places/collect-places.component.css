@@ -19,6 +19,10 @@
   width: 50%;
 }
 
+.mat-raised-button {
+  margin-top: 10px;
+}
+
 .add-condition-section {
   margin-bottom: 20px;
 }
