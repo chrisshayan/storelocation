@@ -24,6 +24,9 @@ class Place:
         initialize_app(cred)
         self.db = firestore.client()
         self.collection = self.db.collection('places')
+        self.places_collection = self.db.collection('places_collection')
+        self.places_conditions_collection = self.db.collection(
+            'places_conditions')
         self.s3 = AwsS3()
 
     def autocomplete(self, input: str, types: list = []):
@@ -49,7 +52,7 @@ class Place:
         try:
             self.CREDIT = 0
             start = datetime.now()
-            placeSearchData = {}
+            place_search_data = {}
             arround = []
             origin_place = {}
             summary = {}
@@ -117,25 +120,25 @@ class Place:
             duration = end - start
             print('all runtime: ', duration.seconds)
 
-            placeSearchData = {
+            place_search_data = {
                 'origin': origin_place,
                 'arround': arround,
                 'summary': summary,
                 'runtime': str(duration.seconds)
             }
-            print('placeSearchData: ', placeSearchData)
-            print('type runtime', placeSearchData.get('runtime'))
+            print('placeSearchData: ', place_search_data)
+            print('type runtime', place_search_data.get('runtime'))
 
             # Save place search data into Firestore
-            addPlaceResult = self.addPlaceSearch(placeSearchData)
+            add_place_search_result = self.add_place_search(place_search_data)
             # print('search id: ', id)
 
             s3_file_name = end.__str__()
-            uploadResult = self.s3.upload(s3_file_name, placeSearchData)
-            if uploadResult:
-                placeSearchData['url'] = f"{uploadResult}"
+            upload_result = self.s3.upload(s3_file_name, place_search_data)
+            if upload_result:
+                place_search_data['url'] = f"{upload_result}"
 
-            return placeSearchData
+            return place_search_data
         except Exception as e:
             print('search.error: ', e)
 
@@ -345,15 +348,73 @@ class Place:
 
         return summary
 
-    def addPlaceSearch(self, placeSearchData):
+    def add_place_search(self, data):
         try:
-            placeSearchData['searchTime'] = datetime.now()
-            return self.collection.add(placeSearchData)
+            data['searchTime'] = datetime.now()
+            return self.collection.add(data)
         except exceptions.FirebaseError as e:
             return f"An Error Occured: {e}"
 
     def collect_places(self, conditions: list, email: str):
-        results = []
+        try:
+            doc_id = ''
+
+            # if email is empty, return empty results
+            if not email:
+                return doc_id
+            # if conditions is empty, return empty results
+            if not conditions or len(conditions) == 0:
+                return doc_id
+
+            places_data = [self.collect_single_place(
+                condition) for condition in conditions]
+
+            if len(places_data) > 0:
+                doc_id = self.add_places_collection(places_data)
+
+            return doc_id
+        except Exception as e:
+            raise e
+
+    def collect_single_place(self, condition: dict):
+        try:
+            result = self.search(query=condition.get(
+                'id'), radius=condition.get('radius'))
+            # sleep 1 second after every search, prevent collision of google api limits
+            time.sleep(1)
+            return result
+        except Exception as e:
+            print('collect_single_place.exception: ', e)
+
+    def add_places_collection(self, places_data):
+        try:
+            id = ''
+            data = {'placeTime': datetime.now(), 'places': places_data}
+            res = self.places_collection.add(data)
+            if res:
+                if res[1]:
+                    id = res[1].id
+            # print('places_collection', res[1].id)
+            return id
+        except exceptions.FirebaseError as e:
+            return f"An Error Occured: {e}"
+
+    def add_places_conditions(self, conditions: list, email: str):
+        try:
+            doc = {
+                'email': email,
+                'conditions': conditions,
+                'status': 'waiting',
+                'create_time': datetime.now(),
+                'collect_time': datetime.now()
+            }
+            id = ''
+            res = self.places_conditions_collection.add(doc)
+            if res and res[1]:
+                id = res[1].id
+            return id
+        except exceptions.FirebaseError as e:
+            return f"An Error Occured: {e}"
 
     def get_highest_matched_place(self, places, coordinate):
         place = [p for p in places if p['coordinate'] == coordinate]
