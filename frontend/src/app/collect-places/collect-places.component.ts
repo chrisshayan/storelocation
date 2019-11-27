@@ -1,3 +1,4 @@
+import { PlacesConditionsService } from './../places-conditions.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { PlaceAutocompleteService } from './../place-autocomplete.service';
 import { Component, OnInit } from '@angular/core';
@@ -32,8 +33,9 @@ export class CollectPlacesComponent implements OnInit {
   displayedColumns: string[] = ['id', 'name', 'radius', 'action']
   dataSource: MatTableDataSource<Condition>
 
+  messages: string[] = []
 
-  constructor(fb: FormBuilder, private autocompleteService: PlaceAutocompleteService) {
+  constructor(fb: FormBuilder, private autocompleteService: PlaceAutocompleteService, private conditionsService: PlacesConditionsService) {
     this.conditionForm = fb.group({
       search: ['', Validators.required],
       radius: [50]
@@ -59,8 +61,6 @@ export class CollectPlacesComponent implements OnInit {
     return []
   }
 
-
-
   addCondition() {
     const condition = this.getCondition()
     this.conditions.add(condition)
@@ -69,7 +69,9 @@ export class CollectPlacesComponent implements OnInit {
 
   updateConditions() {
     const data = Array.from(this.conditions).map((c: string) => JSON.parse(c))
-    return this.dataSource = new MatTableDataSource(data)
+    this.dataSource = new MatTableDataSource(data)
+
+    return this.conditionForm.setValue({ search: '', radius: 50 })
   }
 
   getCondition() {
@@ -87,6 +89,20 @@ export class CollectPlacesComponent implements OnInit {
     const { email } = this.emailMeForm.value
     console.log('email the conditions: ', this.conditions)
     console.log('to email: ', email)
+
+    if (!_.isEmpty(email)) {
+      this.conditionsService.create(Array.from(this.conditions), email).subscribe(response => {
+        console.log('response: ', response)
+        if (!_.isEmpty(response)) {
+          if (!_.isEmpty(response.id)) {
+            this.messages.push('The search results will be sent to your email address after we finished collecting data.')
+          }
+        }
+      })
+    } else {
+      this.messages.push('Please enter the email address!!!')
+      console.log('message', this.messages)
+    }
   }
 
   getPlaceInfo(search) {

@@ -48,17 +48,19 @@ def search():
 #     pass
 
 
-@app.route('/api/collection/conditions/add', methods=['POST'])
+@app.route('/api/place/conditions/add', methods=['POST'])
 def add_collection_document():
-    response = ''
+    response = {'id': ''}
 
     conditions = request.get_json().get('conditions')
     email = request.get_json().get('email')
 
     # collect places information
-    response = place_service.add_places_conditions(conditions, email)
+    conditions_id = place_service.add_places_conditions(conditions, email)
+    if conditions_id:
+        response['id'] = conditions_id
 
-    return response
+    return jsonify(response)
 
 
 if __name__ == "__main__":
