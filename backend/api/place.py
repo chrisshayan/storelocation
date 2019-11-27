@@ -4,7 +4,7 @@ import time
 import sys
 import json
 import os
-from firebase_admin import credentials, firestore, initialize_app, exceptions
+from firebase_admin import credentials, db, firestore, initialize_app, exceptions
 from .s3 import AwsS3
 
 
@@ -21,12 +21,13 @@ class Place:
 
         # Initialize Firestore DB
         cred = credentials.Certificate('firestore_key.json')
-        initialize_app(cred)
+        initialize_app(
+            cred, {'databaseURL': 'https://storelocation-f9311.firebaseio.com'})
         self.db = firestore.client()
         self.collection = self.db.collection('places')
         self.places_collection = self.db.collection('places_collection')
-        self.places_conditions_collection = self.db.collection(
-            'places_conditions')
+        self.places_conditions_collection = db.reference(
+            'places/conditions')
         self.s3 = AwsS3()
 
     def autocomplete(self, input: str, types: list = []):
@@ -389,7 +390,8 @@ class Place:
     def add_places_collection(self, places_data):
         try:
             id = ''
-            data = {'placeTime': datetime.now(), 'places': places_data}
+            data = {'placeTime': datetime.now().__str__(),
+                    'places': places_data}
             res = self.places_collection.add(data)
             if res:
                 if res[1]:
@@ -405,13 +407,13 @@ class Place:
                 'email': email,
                 'conditions': conditions,
                 'status': 'waiting',
-                'create_time': datetime.now(),
-                'collect_time': datetime.now()
+                'create_time': datetime.now().__str__(),
+                'collect_time': datetime.now().__str__()
             }
             id = ''
-            res = self.places_conditions_collection.add(doc)
-            if res and res[1]:
-                id = res[1].id
+            res = self.places_conditions_collection.push(doc)
+            if res and res.key:
+                id = res.key
             return id
         except exceptions.FirebaseError as e:
             return f"An Error Occured: {e}"
