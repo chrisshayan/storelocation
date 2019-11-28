@@ -17,12 +17,14 @@ class Place:
 
     def __init__(self):
         api_key = os.environ.get('gmaps_api_key', 'Gmaps API Key is not set!')
+        realtime_db = os.environ.get(
+            'realtime_db', 'Firebase Realtime Database is not set!')
         self.gmaps = googlemaps.Client(key=api_key)
 
         # Initialize Firestore DB
         cred = credentials.Certificate('firestore_key.json')
         initialize_app(
-            cred, {'databaseURL': 'https://storelocation-f9311.firebaseio.com'})
+            cred, {'databaseURL': f'https://{realtime_db}.firebaseio.com'})
         self.db = firestore.client()
         self.collection = self.db.collection('places')
         self.places_collection = self.db.collection('places_collection')
@@ -356,7 +358,7 @@ class Place:
         except exceptions.FirebaseError as e:
             return f"An Error Occured: {e}"
 
-    def collect_places(self, conditions: list, email: str):
+    def collect_places(self, conditions: list, email: str, id: str):
         try:
             doc_id = ''
 
@@ -371,7 +373,8 @@ class Place:
                 condition) for condition in conditions]
 
             if len(places_data) > 0:
-                doc_id = self.add_places_collection(places_data)
+                print('places_data: ', len(places_data))
+                doc_id = self.add_places_collection(places_data, id)
 
             return doc_id
         except Exception as e:
@@ -387,16 +390,11 @@ class Place:
         except Exception as e:
             print('collect_single_place.exception: ', e)
 
-    def add_places_collection(self, places_data):
+    def add_places_collection(self, places_data, id: str):
         try:
-            id = ''
-            data = {'placeTime': datetime.now().__str__(),
+            data = {'place_time': datetime.now().__str__(),
                     'places': places_data}
-            res = self.places_collection.add(data)
-            if res:
-                if res[1]:
-                    id = res[1].id
-            # print('places_collection', res[1].id)
+            res = self.places_collection.document(id).set(data)
             return id
         except exceptions.FirebaseError as e:
             return f"An Error Occured: {e}"

@@ -43,13 +43,23 @@ def search():
     return jsonify(result)
 
 
-# @app.route('/api/place/collect', methods=['POST'])
-# def collect():
-#     pass
+@app.route('/api/place/collect', methods=['POST'])
+def add_place_collection():
+    response = {'id': ''}
+
+    conditions = request.get_json().get('conditions')
+    email = request.get_json().get('email')
+    id = request.get_json().get('id')
+
+    collection_id = place_service.collect_places(conditions, email, id)
+    if collection_id:
+        response['id'] = collection_id
+
+    return jsonify(response)
 
 
 @app.route('/api/place/conditions/add', methods=['POST'])
-def add_collection_document():
+def add_places_conditions():
     response = {'id': ''}
 
     conditions = request.get_json().get('conditions')
@@ -64,4 +74,5 @@ def add_collection_document():
 
 
 if __name__ == "__main__":
-    app.run(debug=True, host='0.0.0.0', port=int(os.environ.get('PORT', 8080)))
+    app.run(debug=True, host='0.0.0.0',
+            port=int(os.environ.get('PORT', 8080)))
