@@ -1,3 +1,4 @@
+import { AngularFirestore, AngularFirestoreModule } from '@angular/fire/firestore';
 import { ComponentsModule } from './components.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -24,6 +25,8 @@ import { AngularFireFunctionsModule } from '@angular/fire/functions';
 import { JsonViewerComponent } from './json-viewer/json-viewer.component';
 import { SearchResultsJsonComponent } from './search-results-json/search-results-json.component';
 import { CollectPlacesComponent } from './collect-places/collect-places.component';
+import { PageNotfoundComponent } from './page-notfound/page-notfound.component';
+import { PlacesCollectionComponent } from './places-collection/places-collection.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +44,9 @@ import { CollectPlacesComponent } from './collect-places/collect-places.componen
     SearchNoresultComponent,
     JsonViewerComponent,
     SearchResultsJsonComponent,
-    CollectPlacesComponent
+    CollectPlacesComponent,
+    PageNotfoundComponent,
+    PlacesCollectionComponent
   ],
   imports: [
     BrowserModule,
@@ -53,6 +58,7 @@ import { CollectPlacesComponent } from './collect-places/collect-places.componen
     LayoutModule,
     ComponentsModule,
     AngularFireFunctionsModule,
+    AngularFirestoreModule
   ],
   providers: [],
   bootstrap: [AppComponent]

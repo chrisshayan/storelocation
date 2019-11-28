@@ -392,7 +392,7 @@ class Place:
 
     def add_places_collection(self, places_data, id: str):
         try:
-            data = {'place_time': datetime.now().__str__(),
+            data = {'collect_time': datetime.now().__str__(),
                     'places': places_data}
             res = self.places_collection.document(id).set(data)
             return id
@@ -405,8 +405,7 @@ class Place:
                 'email': email,
                 'conditions': conditions,
                 'status': 'waiting',
-                'create_time': datetime.now().__str__(),
-                'collect_time': datetime.now().__str__()
+                'create_time': datetime.now().__str__()
             }
             id = ''
             res = self.places_conditions_collection.push(doc)

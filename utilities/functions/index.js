@@ -57,7 +57,7 @@ const sendMail = async (emailAddress, template, content) => {
       to: emailAddress,
       from: 'StoreLocation <mekongcapitalmap@gmail.com>',
       subject: 'Your places collection is ready',
-      html: `<strong>Visit <a href="${functions.config().storelocation.api_uri}/collect/${content.id}">here</a> to view the Collection of Places Information that you requested.</strong>`,
+      html: `<strong>Visit <a href="${functions.config().storelocation.api_uri}/collection/${content.id}">here</a> to view the Collection of Places Information that you requested.</strong>`,
     };
     sgMail.send(msg);
   } catch (err) {

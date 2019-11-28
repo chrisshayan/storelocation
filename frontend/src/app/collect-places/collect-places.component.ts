@@ -87,12 +87,12 @@ export class CollectPlacesComponent implements OnInit {
 
   emailMe() {
     const { email } = this.emailMeForm.value
-    console.log('email the conditions: ', this.conditions)
-    console.log('to email: ', email)
+    // console.log('email the conditions: ', this.conditions)
+    // console.log('to email: ', email)
 
     if (!_.isEmpty(email)) {
       this.conditionsService.create(Array.from(this.conditions), email).subscribe(response => {
-        console.log('response: ', response)
+        // console.log('response: ', response)
         if (!_.isEmpty(response)) {
           if (!_.isEmpty(response.id)) {
             this.messages.push('The search results will be sent to your email address after we finished collecting data.')
