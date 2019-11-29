@@ -27,6 +27,8 @@ import { SearchResultsJsonComponent } from './search-results-json/search-results
 import { CollectPlacesComponent } from './collect-places/collect-places.component';
 import { PageNotfoundComponent } from './page-notfound/page-notfound.component';
 import { PlacesCollectionComponent } from './places-collection/places-collection.component';
+import { AngularFireModule } from '@angular/fire';
+import { environment } from 'src/environments/environment';
 
 @NgModule({
   declarations: [
@@ -58,6 +60,7 @@ import { PlacesCollectionComponent } from './places-collection/places-collection
     LayoutModule,
     ComponentsModule,
     AngularFireFunctionsModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule
   ],
   providers: [],

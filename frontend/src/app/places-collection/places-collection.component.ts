@@ -1,7 +1,6 @@
-import { Observable } from 'rxjs';
+import { PlacesCollectionService } from './../places-collection.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { AngularFirestore } from '@angular/fire/firestore';
 import _ from 'underscore'
 
 @Component({
@@ -15,14 +14,13 @@ export class PlacesCollectionComponent implements OnInit {
   // private collectionDoc: AngularFirestoreDocument
   // collection: Observable<>
 
-  constructor(private route: ActivatedRoute, private afs: AngularFirestore) { }
+  constructor(private route: ActivatedRoute, private placesCollectionService: PlacesCollectionService) { }
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
       this.collectionId = params.get('id')
       if (!_.isEmpty(this.collectionId)) {
-        this.doc = this.afs.doc(`/places_collection/${this.collectionId}`)
-        console.log('doc: ', this.doc)
+        this.placesCollectionService.get(this.collectionId).subscribe(doc => this.doc = doc.data())
       }
     })
     console.log('collectionId: ', this.collectionId)
